@@ -12,8 +12,8 @@ development:
   <<: *default
   adapter: postgresql
   database: lms_rails_dev
-  username: lms_rails_dev
-  password: lms_rails_dev
+  username: postgres
+  password: postgres
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
