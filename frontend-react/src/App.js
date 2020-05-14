@@ -13,7 +13,7 @@ export default class App extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            user: JSON.parse(Cookies.get('user-object')),
+            user: Cookies.get('user-object') ? JSON.parse(Cookies.get('user-object')) : {},
             userLoginStatus: Cookies.get("auth-token") ? true : false, 
             setUser: (user) => {
                 this.setState({user: user})
