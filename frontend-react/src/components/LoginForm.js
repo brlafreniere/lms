@@ -40,6 +40,10 @@ export default class LoginForm extends React.Component {
     }
 
     render () {
+        var error
+        if (this.state.unauthorizedError) {
+            error = <Error message="Username or password incorrect." />
+        }
         return (
             <AppContext.Consumer>
                 {(context) => (
@@ -55,7 +59,7 @@ export default class LoginForm extends React.Component {
                             </div>
                             <input type="submit" />
                         </form>
-                        { this.state.unauthorizedError ? <Error message="Username or password incorrect." /> : <Error message="A network error ocurred." /> }
+                        { error }
                     </div>
                 )}
             </AppContext.Consumer>
