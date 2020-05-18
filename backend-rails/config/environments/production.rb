@@ -1,7 +1,7 @@
 Rails.application.configure do
   config.middleware.insert_before 0, Rack::Cors do
     allow do
-      origins 'lms.lizardgizzards.com'
+      origins 'lms.blainelafreniere.io'
       resource '*', headers: :any, methods: [:get, :post, :options]
     end
   end
