@@ -49,7 +49,7 @@ export default class App extends React.Component {
                         <Route exact path="/my-account">
                             <MyAccount />
                         </Route>
-                        <Route exact path="/admin">
+                        <Route path="/admin">
                             <AdminPage />
                         </Route>
                     </Navbar>

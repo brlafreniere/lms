@@ -77,41 +77,39 @@ export default class BooksAdmin extends React.Component {
     render() {
         return (
             <div className="admin-body">
-                <Router>
-                    <ul className="admin-menu nav nav-pills">
-                        <li className="nav-item"><NavLink className="nav-link" to="/admin/books/new">New Book</NavLink></li>
-                    </ul>
-                    <Switch>
-                        <Route exact path="/admin/books">
-                            <div className='tab-body'>
-                                <table className="table">
-                                    <thead>
-                                        <tr>
-                                            <th>Title</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {this.state.books.map(b => 
-                                        <tr key={b.id}>
-                                            <td>{b.title}</td>
-                                            <td>
-                                                <nav className="nav">
-                                                    <Link className="nav-link" to="/admin/books/:id/edit">Edit</Link>
-                                                    <Link className="nav-link" to="/admin/books/:id/delete">Delete</Link>
-                                                </nav>
-                                            </td>
-                                        </tr>
-                                        )}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </Route>
-                        <Route exact path="/admin/books/new">
-                            <NewBookForm refreshBookList={this.loadBooks}/>
-                        </Route>
-                    </Switch>
-                </Router>
+                <ul className="admin-menu nav nav-pills">
+                    <li className="nav-item"><NavLink className="nav-link" to="/admin/books/new">New Book</NavLink></li>
+                </ul>
+                <Switch>
+                    <Route exact path="/admin/books">
+                        <div className='tab-body'>
+                            <table className="table">
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {this.state.books.map(b => 
+                                    <tr key={b.id}>
+                                        <td>{b.title}</td>
+                                        <td>
+                                            <nav className="nav">
+                                                <Link className="nav-link" to="/admin/books/:id/edit">Edit</Link>
+                                                <Link className="nav-link" to="/admin/books/:id/delete">Delete</Link>
+                                            </nav>
+                                        </td>
+                                    </tr>
+                                    )}
+                                </tbody>
+                            </table>
+                        </div>
+                    </Route>
+                    <Route exact path="/admin/books/new">
+                        <NewBookForm refreshBookList={this.loadBooks}/>
+                    </Route>
+                </Switch>
             </div>
         );
     }
