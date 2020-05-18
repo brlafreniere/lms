@@ -1,10 +1,6 @@
 import React from "react";
 import Axios from "axios";
 import {
-    Link
-} from "react-router-dom";
-import {
-    BrowserRouter as Router,
     Switch,
     Route,
     NavLink,
@@ -16,8 +12,20 @@ class NewBookForm extends React.Component {
         super(props);
         this.state = {
             title: '',
-            redirect: false
+            redirect: false,
+            authors: [],
+            author_id: null
         };
+    }
+
+    componentDidMount() {
+        this.loadAuthors();
+    }
+
+    loadAuthors = () => {
+        Axios.get(`${process.env.REACT_APP_API_URL}/authors`).then(response => {
+            this.setState({authors: response.data})
+        })
     }
 
     handleSubmit = async (event) => {
@@ -25,7 +33,8 @@ class NewBookForm extends React.Component {
         await Axios.post(
             `${process.env.REACT_APP_API_URL}/books`,
             {
-                title: this.state.title
+                title: this.state.title,
+                author_id: this.state.author_id
             }
         ).then(response => {
             this.setState({redirect: true})
@@ -34,20 +43,33 @@ class NewBookForm extends React.Component {
         })
     }
 
-    handleChange = (event) => {
+    handleTitleChange = (event) => {
         this.setState({title: event.target.value})
+    }
+
+    handleAuthorIdChange = (event) => {
+        this.setState({author_id: event.target.value})
     }
 
     render() {
         if (this.state.redirect) {
             this.props.refreshBookList();
         }
+        let authors = this.state.authors.map(author => {
+            return <option key={author.id} value={author.id}>{author.last_name}, {author.first_name}</option>
+        })
         return (
             <form onSubmit={this.handleSubmit}>
                 {this.state.redirect ? <Redirect to="/admin/books" /> : null}
                 <div className="form-group">
                     <label htmlFor="title">Title</label>
-                    <input name="title" value={this.state.title} onChange={this.handleChange} type="text" className="form-control" />
+                    <input name="title" value={this.state.title} onChange={this.handleTitleChange} type="text" className="form-control" />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="author">Author</label>
+                    <select name="author_id" onChange={this.handleAuthorIdChange} className="custom-select" size="5">
+                        {authors}
+                    </select>
                 </div>
                 <button type="submit" className="btn btn-primary">Submit</button>
             </form>
@@ -70,6 +92,13 @@ export default class BooksAdmin extends React.Component {
         })
     }
 
+    deleteBook = (event, bookId) => {
+        event.preventDefault();
+        Axios.delete(process.env.REACT_APP_API_URL + '/books/' + bookId).then(response => {
+            this.loadBooks();
+        })
+    }
+
     componentDidMount() {
         this.loadBooks()
     }
@@ -77,27 +106,28 @@ export default class BooksAdmin extends React.Component {
     render() {
         return (
             <div className="admin-body">
-                <ul className="admin-menu nav nav-pills">
-                    <li className="nav-item"><NavLink className="nav-link" to="/admin/books/new">New Book</NavLink></li>
-                </ul>
                 <Switch>
                     <Route exact path="/admin/books">
+                        <div className="admin-menu">
+                            <NavLink className="btn btn-primary" to="/admin/books/new">New Book</NavLink>
+                        </div>
                         <div className='tab-body'>
                             <table className="table">
                                 <thead>
                                     <tr>
                                         <th>Title</th>
-                                        <th></th>
+                                        <th>Author</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {this.state.books.map(b => 
                                     <tr key={b.id}>
                                         <td>{b.title}</td>
+                                        <td>{b.author.last_name}, {b.author.first_name}</td>
                                         <td>
                                             <nav className="nav">
-                                                <Link className="nav-link" to="/admin/books/:id/edit">Edit</Link>
-                                                <Link className="nav-link" to="/admin/books/:id/delete">Delete</Link>
+                                                <button className="btn btn-primary" onClick={(e) => {this.deleteBook(e, b.id)}}>Delete</button>
                                             </nav>
                                         </td>
                                     </tr>
