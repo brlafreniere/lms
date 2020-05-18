@@ -39,6 +39,9 @@ class NewBookForm extends React.Component {
     }
 
     render() {
+        if (this.state.redirect) {
+            this.props.refreshBookList();
+        }
         return (
             <form onSubmit={this.handleSubmit}>
                 {this.state.redirect ? <Redirect to="/admin/books" /> : null}
@@ -105,7 +108,7 @@ export default class BooksAdmin extends React.Component {
                             </div>
                         </Route>
                         <Route exact path="/admin/books/new">
-                            <NewBookForm />
+                            <NewBookForm refreshBookList={this.loadBooks}/>
                         </Route>
                     </Switch>
                 </Router>
