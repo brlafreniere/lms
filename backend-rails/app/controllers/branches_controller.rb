@@ -24,7 +24,8 @@ class BranchesController < ApplicationController
     end
 
     private
-        def branch_params
-            params.permit(:name, :street_address, :city, :state, :zip)
-        end
+
+    def branch_params
+        params.permit(:name, :street_address, :city, :state, :zip)
+    end
 end

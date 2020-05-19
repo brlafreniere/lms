@@ -1,6 +1,8 @@
 import React from "react";
 
-export default class BranchForm extends React.Component {
+import FormBase from "./FormBase";
+
+export default class BranchForm extends FormBase {
     constructor(props) {
         super(props)
         this.state = {
@@ -14,29 +16,20 @@ export default class BranchForm extends React.Component {
         }
     }
 
-    handleFieldChange = (event) => {
-        const { name, value } = event.target;        
-        this.setState(prevState => {
-            let formFields = Object.assign({}, prevState.formFields)
-            formFields[name] = value
-            return {formFields}
-        })
-    }
-
     render() {
         return (
             <form onSubmit={(e) => {e.preventDefault(); this.props.handleSubmit(e, this.state.formFields)}}>
                 <div className="form-group">
                     <label htmlFor="name">Name</label>
-                    <input name="name" value={this.state.name} onChange={this.handleFieldValueChange} type="text" className="form-control" />
+                    <input name="name" value={this.state.name} onChange={this.handleFieldChange} type="text" className="form-control" />
                 </div>
                 <div className="form-group">
                     <label htmlFor="street_address">Street Address</label>
-                    <input name="street_address" value={this.state.street_address} onChange={this.handleFieldValueChange} type="text" className="form-control" />
+                    <input name="street_address" value={this.state.street_address} onChange={this.handleFieldChange} type="text" className="form-control" />
                 </div>
                 <div className="form-group">
                     <label htmlFor="city">City</label>
-                    <input name="city" value={this.state.city} onChange={this.handleFieldValueChange} type="text" className="form-control" />
+                    <input name="city" value={this.state.city} onChange={this.handleFieldChange} type="text" className="form-control" />
                 </div>
                 <div className="form-group">
                     <label htmlFor="state">State</label>
@@ -98,7 +91,7 @@ export default class BranchForm extends React.Component {
                 </div>
                 <div className="form-group">
                     <label htmlFor="zip">Zip</label>
-                    <input name="zip" value={this.state.zip} onChange={this.handleFieldValueChange} type="text" className="form-control" />
+                    <input name="zip" value={this.state.zip} onChange={this.handleFieldChange} type="text" className="form-control" />
                 </div>
                 <button type="submit" className="btn btn-primary">Submit</button>
             </form>
