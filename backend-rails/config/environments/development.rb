@@ -5,6 +5,9 @@ Rails.application.configure do
       resource '*', :headers => :any, :methods => [:get, :post, :delete, :put, :patch, :options, :head]
     end
   end
+
+  config.public_file_server.enabled = true
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on

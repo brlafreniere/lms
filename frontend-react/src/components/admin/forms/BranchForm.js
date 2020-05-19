@@ -4,20 +4,26 @@ export default class BranchForm extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            name: "",
-            street_address: "",
-            city: "",
-            state: "",
-            zip: ""
+            formFields: {
+                name: "",
+                street_address: "",
+                city: "",
+                state: "",
+                zip: ""
+            }
         }
     }
 
-    handleFieldValueChange = (event) => {
-        this.setState({[event.target.name]: event.target.value})
+    handleFieldChange = (event) => {
+        const { name, value } = event.target;        
+        this.setState(prevState => {
+            let formFields = Object.assign({}, prevState.formFields)
+            formFields[name] = value
+            return {formFields}
+        })
     }
 
     render() {
-        //console.log(this.props.handleSubmit)
         return (
             <form onSubmit={(e) => {e.preventDefault(); this.props.handleSubmit(e, this.state)}}>
                 <div className="form-group">
@@ -34,7 +40,7 @@ export default class BranchForm extends React.Component {
                 </div>
                 <div className="form-group">
                     <label htmlFor="state">State</label>
-                    <select class="form-control" id="state" name="state">
+                    <select className="form-control" id="state" name="state">
                         <option value="">N/A</option>
                         <option value="AK">Alaska</option>
                         <option value="AL">Alabama</option>

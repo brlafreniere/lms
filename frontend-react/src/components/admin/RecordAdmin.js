@@ -15,23 +15,31 @@ class NewRecordForm extends React.Component {
         };
     }
 
-    handleSubmit = async (event, formData) => {
+    handleSubmit = async (event, formFields, multipart = false) => {
         event.preventDefault();
 
-        await Axios.post(`${process.env.REACT_APP_API_URL}/${this.props.plural}`, formData)
+        let formData = null;
+        let config = null;
+        if (multipart) {
+            formData = new FormData();
+            for (let [key, value] of Object.entries(formFields)) {
+                formData.append(key, value)
+            }
+            config = {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }
+        } else {
+            formData = formFields;
+        }
+
+        await Axios.post(`${process.env.REACT_APP_API_URL}/${this.props.plural}`, formData, config)
         .then(response => {
             this.setState({redirect: true})
         }).catch(error => {
             console.log(error)
         })
-    }
-
-    handleTitleChange = (event) => {
-        this.setState({title: event.target.value})
-    }
-
-    handleAuthorIdChange = (event) => {
-        this.setState({author_id: event.target.value})
     }
 
     render() {
@@ -88,13 +96,6 @@ export default class RecordAdmin extends React.Component {
         // this allows us to pass props to children that are loaded via {this.props.children}
         // more on that here: https://medium.com/better-programming/passing-data-to-props-children-in-react-5399baea0356
         const TableComponent = this.props.table
-
-        const table = React.Children.map(this.props.table, child => {
-            return React.cloneElement(child, {
-                records: this.state.records
-            })
-        })
-
         return (
             <div className="admin-body">
                 {this.state.errorMessage ? <errorMessage msg={this.state.errorMessage} /> : null}

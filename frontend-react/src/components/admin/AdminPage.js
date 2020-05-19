@@ -9,8 +9,12 @@ import BooksAdmin from "./BooksAdmin";
 import AuthorsAdmin from "./AuthorsAdmin";
 
 import RecordAdmin from "./RecordAdmin";
+
 import BranchTable from "./tables/BranchTable";
 import BranchForm from "./forms/BranchForm";
+
+import BookTable from "./tables/BookTable";
+import BookForm from "./forms/BookForm";
 
 export default class AdminPage extends React.Component {
     render() {
@@ -34,7 +38,7 @@ export default class AdminPage extends React.Component {
                 </nav>
                 <Switch>
                     <Route path="/admin/books">
-                        <BooksAdmin />
+                        <RecordAdmin singular="book" plural="books" table={BookTable} form={BookForm} />
                     </Route>
                     <Route path="/admin/authors">
                         <AuthorsAdmin />

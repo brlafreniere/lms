@@ -1,5 +1,17 @@
 import React from 'react';
 import axios from 'axios';
+import "./NewBooks.css";
+
+function Book(props) {
+    return (
+        <div className="book-tile">
+            <div className="book-tile-title">{props.book.title}</div>
+            <div className="book-tile-image">
+                <img src={`${process.env.REACT_APP_API_URL}/uploads/${props.book.cover_image_file_name}`} />
+            </div>
+        </div>
+    )
+}
 
 export default class NewBooks extends React.Component {
     state = {
@@ -16,10 +28,8 @@ export default class NewBooks extends React.Component {
 
     render() {
         return (
-            <div className="NewBooks">
-                <ul>
-                    { this.state.books.map(book => <li key={book.id}>{book.title}</li>) }
-                </ul>
+            <div className="new-books-area">
+                { this.state.books.map(book => <Book book={book} key={book.id} />)}
             </div>
         );
     }

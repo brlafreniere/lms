@@ -1,0 +1,23 @@
+.new-books-area {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.book-tile {
+    background-color: #b9e4fa;
+    padding: 1em;
+    margin: 1em;
+    width: 200px;
+}
+
+.book-tile-title {
+    background-color: white;
+    padding: 1em;
+    border-radius: 1em;
+    margin-bottom: 1em;
+}
+
+.book-tile img {
+    max-width: 100%;
+    max-height: 100%;
+}
