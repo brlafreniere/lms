@@ -77,6 +77,14 @@ class NewBookForm extends React.Component {
     }
 }
 
+function errorMessage(props) {
+    return (
+        <div class="alert alert-danger" role="alert">
+            {props.msg}
+        </div>
+    )
+}
+
 export default class BooksAdmin extends React.Component {
     constructor(props) {
         super(props)
@@ -89,6 +97,8 @@ export default class BooksAdmin extends React.Component {
         Axios.get(`${process.env.REACT_APP_API_URL}/books`)
         .then(response => {
             this.setState({books: response.data})
+        }).catch(error => {
+            console.log(error)
         })
     }
 
@@ -106,6 +116,7 @@ export default class BooksAdmin extends React.Component {
     render() {
         return (
             <div className="admin-body">
+                {this.state.errorMessage ? <errorMessage msg={this.state.errorMessage} /> : null}
                 <Switch>
                     <Route exact path="/admin/books">
                         <div className="admin-menu">

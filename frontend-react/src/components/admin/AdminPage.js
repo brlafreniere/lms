@@ -6,6 +6,11 @@ import {
 } from "react-router-dom";
 import "./AdminPage.css";
 import BooksAdmin from "./BooksAdmin";
+import AuthorsAdmin from "./AuthorsAdmin";
+
+import RecordAdmin from "./RecordAdmin";
+import BranchTable from "./tables/BranchTable";
+import BranchForm from "./forms/BranchForm";
 
 export default class AdminPage extends React.Component {
     render() {
@@ -15,6 +20,9 @@ export default class AdminPage extends React.Component {
                     <ul className="nav nav-tabs">
                         <li className="nav-item">
                             <NavLink to="/admin/books" className="nav-link" activeClassName="active">Books</NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <NavLink to="/admin/authors" className="nav-link" activeClassName="active">Authors</NavLink>
                         </li>
                         <li className="nav-item">
                             <NavLink to="/admin/branches" className="nav-link" activeClassName="active">Branches</NavLink>
@@ -27,6 +35,12 @@ export default class AdminPage extends React.Component {
                 <Switch>
                     <Route path="/admin/books">
                         <BooksAdmin />
+                    </Route>
+                    <Route path="/admin/authors">
+                        <AuthorsAdmin />
+                    </Route>
+                    <Route path="/admin/branches">
+                        <RecordAdmin singular="branch" plural="branches" table={BranchTable} form={BranchForm} />
                     </Route>
                 </Switch>
             </div>
