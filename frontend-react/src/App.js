@@ -45,28 +45,26 @@ export default class App extends React.Component {
                             local county library and their network of branches. With it, you
                             can manage branches, book inventory, checkouts,
                             members, and employees.</p>
-
-                            <h2>How did you build this web application?</h2>
-                            <p>This web application was built with React and
-                            Ruby on Rails.</p>
-
-                            <p>This web application was built by me, Blaine
-                            Lafreniere. My personal website is <a
-                            href="http://blainelafreniere.io">blainelafreniere.io</a></p>
                             
-                            <h2>GitHub</h2>
-                            <p>The source code is available on <a
-                            href="https://github.com/brlafreniere/lms">GitHub</a>.</p>
-
-                            <h2>Twitter</h2>
-                            <p>You can follow me on <a
-                            href="https://twitter.com/brlafreniere">Twitter</a> as well.</p>
-
                             <h2>How do I log in and see the system?</h2>
-
                             <p>If you would like credentials to log in and
                             demo the site, feel free to contact me and I
                             will send you the login details!</p>
+
+                            <h2>How did you build this web application?</h2>
+                            <p>I built this web application was built with React and
+                            Ruby on Rails.</p>
+
+                            <h2>Source code</h2>
+                            <p>The source code is available on <a
+                            href="https://github.com/brlafreniere/lms">GitHub</a>.</p>
+
+                            <h2>Me, elsewhere on the internet</h2>
+                            <ul>
+                                <li><a href="http://blainelafreniere.io">My website and blog</a></li>
+                                <li><a href="https://github.com/brlafreniere">GitHub</a></li>
+                                <li><a href="https://twitter.com/brlafreniere">Twitter</a></li>
+                            </ul>
                         </Route>
                         <Route exact path="/about">
                             The About Page
