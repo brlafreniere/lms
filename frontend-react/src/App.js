@@ -55,8 +55,7 @@ export default class App extends React.Component {
                             href="http://blainelafreniere.io">blainelafreniere.io</a></p>
 
                             <p>You can follow me on <a
-                            href="https://twitter.com/brlafreniere">Twitter</a>
-                            as well.</p>
+                            href="https://twitter.com/brlafreniere">Twitter</a> as well.</p>
 
                             <h2>How do I log in and see the system?</h2>
 
