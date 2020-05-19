@@ -38,7 +38,7 @@ export default class App extends React.Component {
                 <AppContext.Provider value={this.state}>
                     <Navbar>
                         <Route exact path="/">
-                            <h2>Welcome</h2>
+                            <h1>Welcome</h1>
                             <p>Welcome to my Library Management System. This
                             is a web application that would be used for
                             managing a library organization, such as your
@@ -53,7 +53,12 @@ export default class App extends React.Component {
                             <p>This web application was built by me, Blaine
                             Lafreniere. My personal website is <a
                             href="http://blainelafreniere.io">blainelafreniere.io</a></p>
+                            
+                            <h2>GitHub</h2>
+                            <p>The source code is available on <a
+                            href="https://github.com/brlafreniere/lms">GitHub</a>.</p>
 
+                            <h2>Twitter</h2>
                             <p>You can follow me on <a
                             href="https://twitter.com/brlafreniere">Twitter</a> as well.</p>
 
