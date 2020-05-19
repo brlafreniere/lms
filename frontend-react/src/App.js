@@ -42,24 +42,23 @@ export default class App extends React.Component {
                             <p>Welcome to my Library Management System. This
                             is a web application that would be used for
                             managing a library organization, such as your
-                            local county library and their network of branches. With it, you
-                            can manage branches, book inventory, checkouts,
-                            members, and employees.</p>
+                            local county library along with their network of
+                            branches. With it, you can manage branches, book
+                            inventory, checkouts, members, and employees.</p>
                             
-                            <h2>How do I log in and see the system?</h2>
-                            <p>If you would like credentials to log in and
-                            demo the site, feel free to contact me and I
-                            will send you the login details!</p>
+                            <h4>How do I log in?</h4>
+                            <p>If you would like to demo the admin side, feel
+                            free to contact me and I will send you the login
+                            details!</p>
 
-                            <h2>How did you build this web application?</h2>
-                            <p>I built this web application was built with React and
-                            Ruby on Rails.</p>
+                            <h4>How did you build this?</h4>
+                            <p>I built this with React and Ruby on Rails.</p>
 
-                            <h2>Source code</h2>
+                            <h4>Source code</h4>
                             <p>The source code is available on <a
                             href="https://github.com/brlafreniere/lms">GitHub</a>.</p>
 
-                            <h2>Me, elsewhere on the internet</h2>
+                            <h4>Me, elsewhere on the internet</h4>
                             <ul>
                                 <li><a href="http://blainelafreniere.io">My website and blog</a></li>
                                 <li><a href="https://github.com/brlafreniere">GitHub</a></li>
