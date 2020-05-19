@@ -47,17 +47,17 @@ export default class LoginForm extends React.Component {
         return (
             <AppContext.Consumer>
                 {(context) => (
-                    <div>
+                    <div style={{width: "40%"}}>
                         <form onSubmit={(e) => this.logIn(context, e)}>
-                            <div>
-                                E-mail: <br />
-                                <input type="email" value={this.state.email} onChange={this.changeEmail} />
+                            <div className="form-group">
+                                <label htmlFor="email">E-mail</label>
+                                <input name="email" type="email" value={this.state.email} onChange={this.changeEmail} className="form-control" />
                             </div>
-                            <div>
-                                Password: <br />
-                                <input type="password" value={this.state.password} onChange={this.changePassword} />
+                            <div className="form-group">
+                                <label htmlFor="password">Password</label>
+                                <input name="password" type="password" value={this.state.password} onChange={this.changePassword} className="form-control" />
                             </div>
-                            <input type="submit" />
+                            <input type="submit" className="btn btn-primary" />
                         </form>
                         { error }
                     </div>
