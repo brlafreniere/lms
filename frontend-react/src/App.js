@@ -47,8 +47,8 @@ export default class App extends React.Component {
                             members, and employees.</p>
 
                             <h2>How did you build this web application?</h2>
-                            <p>This web application was built with React on
-                            the frontend, and Rails on the backend.</p>
+                            <p>This web application was built with React and
+                            Ruby on Rails.</p>
 
                             <p>This web application was built by me, Blaine
                             Lafreniere. My personal website is <a
