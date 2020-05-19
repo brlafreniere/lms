@@ -25,7 +25,7 @@ export default class BranchForm extends React.Component {
 
     render() {
         return (
-            <form onSubmit={(e) => {e.preventDefault(); this.props.handleSubmit(e, this.state)}}>
+            <form onSubmit={(e) => {e.preventDefault(); this.props.handleSubmit(e, this.state.formFields)}}>
                 <div className="form-group">
                     <label htmlFor="name">Name</label>
                     <input name="name" value={this.state.name} onChange={this.handleFieldValueChange} type="text" className="form-control" />
