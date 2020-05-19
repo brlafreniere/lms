@@ -38,7 +38,27 @@ export default class App extends React.Component {
                 <AppContext.Provider value={this.state}>
                     <Navbar>
                         <Route exact path="/">
-                            Welcome to the Library Management System
+                            <h2>Welcome</h2>
+                            <p>Welcome to my Library Management System. This
+                            is a web application that would be used for
+                            managing a library organization, such as your
+                            local county library and their network of branches. With it, you
+                            can manage branches, book inventory, checkouts,
+                            members, and employees.</p>
+
+                            <h2>How did you build this web application?</h2>
+                            <p>This web application was built with React on
+                            the frontend, and Rails on the backend.</p>
+
+                            <p>This web application was built by me, Blaine
+                            Lafreniere. My personal website is <a
+                            href="http://blainelafreniere.io">blainelafreniere.io</a></p>
+
+                            <h2>How do I log in and see the system?</h2>
+
+                            <p>If you would like credentials to log in and
+                            demo the site, feel free to contact me and I
+                            will send you the login details!</p>
                         </Route>
                         <Route exact path="/about">
                             The About Page
