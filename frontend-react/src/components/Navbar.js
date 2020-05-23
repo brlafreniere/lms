@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Link } from 'react-router-dom';
 import AppContext from "../AppContext";
 
-const adminLink = (
+const AdminLink = (
     <li className="nav-item">
         <Link to="/admin" className="nav-link">
             Admin
@@ -10,35 +10,65 @@ const adminLink = (
     </li>
 )
 
-const userLoggedInMenu = (
-    <AppContext.Consumer>
-        {(context => 
+const UserMenu = (props) => {
+    if (props.userLoginStatus) {
+        return (
             <ul className="navbar-nav ml-auto">
-                {context.user.admin ? adminLink : null}
+                {props.userIsAdmin ? AdminLink : null}
                 <li className="nav-item">
                     <Link to="/my-account" className="nav-link">
                         My Account
                     </Link>
                 </li>
                 <li className="nav-item">
-                    <Link onClick={context.logUserOut} to="/" className="nav-link">
+                    <Link onClick={props.logoutCallback} to="/" className="nav-link">
                         Log Out
                     </Link>
                 </li>
             </ul>
-        )}
-    </AppContext.Consumer>
-)
+        )
+    } else {
+        return (
+            <ul className="navbar-nav ml-auto">
+                <li className="nav-item">
+                    <Link to="/my-account" className="nav-link">
+                        Log In
+                    </Link>
+                </li>
+            </ul>
+        )
+    }
+}
 
-const userLoggedOutMenu = (
-    <ul className="navbar-nav ml-auto">
-        <li className="nav-item">
-            <Link to="/my-account" className="nav-link">
-                Log In
-            </Link>
-        </li>
-    </ul>
-)
+// const userLoggedInMenu = (
+//     <AppContext.Consumer>
+//         {(context => 
+//             <ul className="navbar-nav ml-auto">
+//                 {context.user.admin ? adminLink : null}
+//                 <li className="nav-item">
+//                     <Link to="/my-account" className="nav-link">
+//                         My Account
+//                     </Link>
+//                 </li>
+//                 <li className="nav-item">
+//                     <Link onClick={context.logUserOut} to="/" className="nav-link">
+//                         Log Out
+//                     </Link>
+//                 </li>
+//             </ul>
+//         )}
+//     </AppContext.Consumer>
+// )
+
+// const userLoggedOutMenu = (
+//     <ul className="navbar-nav ml-auto">
+//         <li className="nav-item">
+//             <Link to="/my-account" className="nav-link">
+//                 Log In
+//             </Link>
+//         </li>
+//     </ul>
+// )
 
 export default class Navbar extends React.Component {
     render() {
@@ -64,7 +94,7 @@ export default class Navbar extends React.Component {
                                                 </Link>
                                             </li>
                                         </ul>
-                                        {context.userLoginStatus ? userLoggedInMenu : userLoggedOutMenu}
+                                        <UserMenu userLoginStatus={context.userLoginStatus} userIsAdmin={context.user.admin} logoutCallback={context.logUserOut} />
                                     </div>
                                 </div>
                             </nav>
