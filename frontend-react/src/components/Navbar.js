@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Link } from 'react-router-dom';
-import './Navbar.css';
 import AppContext from "../AppContext";
 
 const adminLink = (
@@ -60,8 +59,8 @@ export default class Navbar extends React.Component {
                                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                                         <ul className="navbar-nav mr-auto">
                                             <li className="nav-item">
-                                                <Link to="/new-books" className="nav-link">
-                                                    New Books
+                                                <Link to="/about" className="nav-link">
+                                                    About
                                                 </Link>
                                             </li>
                                         </ul>

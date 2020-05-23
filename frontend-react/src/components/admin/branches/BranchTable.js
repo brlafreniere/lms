@@ -1,11 +1,6 @@
 import React from "react"
-import { render } from "react-dom"
 
 export default class BranchTable extends React.Component {
-    constructor(props) {
-        super(props)
-    }
-
     render() {
         return (
             <div className='tab-body'>

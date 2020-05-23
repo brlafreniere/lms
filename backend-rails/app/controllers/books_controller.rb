@@ -2,8 +2,13 @@ class BooksController < ApplicationController
     # before_action :authenticate_request
 
     def index
-        @books = Book.all
+        @books = Book.all.sort_by(&:created_at)
         render json: @books.to_json(:include => :author)
+    end
+
+    def show
+        @book = Book.find(params[:id])
+        render json: @book.to_json(:include => :author)
     end
 
     def create

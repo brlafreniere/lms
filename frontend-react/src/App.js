@@ -4,10 +4,13 @@ import Cookies from 'js-cookie';
 
 import './App.css';
 import Navbar from './components/Navbar';
-import NewBooks from './components/NewBooks';
-import MyAccount from './components/MyAccount';
+import NewBooks from './components/pages/NewBooks';
+import MyAccount from './components/pages/MyAccount';
 import AppContext from './AppContext';
 import AdminPage from './components/admin/AdminPage';
+import BookDetailPage from './components/pages/BookDetail';
+import AboutLMS from './components/pages/AboutLMS';
+import LibraryHome from './components/pages/LibraryHome';
 
 export default class App extends React.Component {
     constructor(props) {
@@ -38,38 +41,16 @@ export default class App extends React.Component {
                 <AppContext.Provider value={this.state}>
                     <Navbar>
                         <Route exact path="/">
-                            <h1>Welcome</h1>
-                            <p>Welcome to my Library Management System. This
-                            is a web application that would be used for
-                            managing a library organization, such as your
-                            local county library along with their network of
-                            branches. With it, you can manage branches, book
-                            inventory, checkouts, members, and employees.</p>
-                            
-                            <h4>How do I log in?</h4>
-                            <p>If you would like to demo the admin side, feel
-                            free to contact me and I will send you the login
-                            details!</p>
-
-                            <h4>How did you build this?</h4>
-                            <p>I built this with React and Ruby on Rails.</p>
-
-                            <h4>Source code</h4>
-                            <p>The source code is available on <a
-                            href="https://github.com/brlafreniere/lms">GitHub</a>.</p>
-
-                            <h4>Me, elsewhere on the internet</h4>
-                            <ul>
-                                <li><a href="http://blainelafreniere.io">My website and blog</a></li>
-                                <li><a href="https://github.com/brlafreniere">GitHub</a></li>
-                                <li><a href="https://twitter.com/brlafreniere">Twitter</a></li>
-                            </ul>
+                            <LibraryHome />
                         </Route>
                         <Route exact path="/about">
-                            The About Page
+                            <AboutLMS />
                         </Route>
                         <Route exact path="/new-books">
                             <NewBooks />
+                        </Route>
+                        <Route exact path="/book/:id">
+                            <BookDetailPage />
                         </Route>
                         <Route exact path="/my-account">
                             <MyAccount />

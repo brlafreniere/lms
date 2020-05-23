@@ -25,3 +25,28 @@ main {
     text-align: left;
     padding-top: 25px;
 }
+
+.book-group {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.book-tile {
+    background-color: #b9e4fa;
+    padding: 1em;
+    margin: 1em;
+    -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.3);
+    -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.3);
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.3);
+}
+
+.book-tile-title {
+    background-color: white;
+    padding: 1em;
+    border-radius: 1em;
+    margin-top: 1em;
+}
+
+.book-tile img {
+    width: 100px;
+}

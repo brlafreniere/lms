@@ -1,14 +1,16 @@
 import React from 'react';
 import axios from 'axios';
-import "./NewBooks.css";
+import { Link } from "react-router-dom";
 
 function Book(props) {
     return (
         <div className="book-tile">
-            <div className="book-tile-title">{props.book.title}</div>
-            <div className="book-tile-image">
-                <img src={`${process.env.REACT_APP_API_URL}/uploads/${props.book.cover_image_file_name}`} />
-            </div>
+            <Link to={`/book/${props.book.id}`}>
+                <div className="book-tile-title">{props.book.title}</div>
+                <div className="book-tile-image">
+                    <img alt={`${props.book.title} book cover`} src={`${process.env.REACT_APP_API_URL}/uploads/${props.book.cover_image_file_name}`} />
+                </div>
+            </Link>
         </div>
     )
 }

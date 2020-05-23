@@ -5,16 +5,17 @@ import {
     NavLink
 } from "react-router-dom";
 import "./AdminPage.css";
-import BooksAdmin from "./BooksAdmin";
-import AuthorsAdmin from "./AuthorsAdmin";
 
-import RecordAdmin from "./RecordAdmin";
+import RecordManager from "./RecordManager";
 
-import BranchTable from "./tables/BranchTable";
-import BranchForm from "./forms/BranchForm";
+import BranchTable from "./branches/BranchTable";
+import BranchForm from "./branches/BranchForm";
 
-import BookTable from "./tables/BookTable";
-import BookForm from "./forms/BookForm";
+import AuthorTable from "./authors/AuthorTable";
+import AuthorForm from "./authors/AuthorForm";
+
+import BookTable from "./books/BookTable";
+import BookForm from "./books/BookForm";
 
 export default class AdminPage extends React.Component {
     render() {
@@ -38,13 +39,13 @@ export default class AdminPage extends React.Component {
                 </nav>
                 <Switch>
                     <Route path="/admin/books">
-                        <RecordAdmin singular="book" plural="books" table={BookTable} form={BookForm} />
+                        <RecordManager key="book" singular="book" plural="books" table={BookTable} form={BookForm} />
                     </Route>
                     <Route path="/admin/authors">
-                        <AuthorsAdmin />
+                        <RecordManager key="author" singular="author" plural="authors" table={AuthorTable} form={AuthorForm} />
                     </Route>
                     <Route path="/admin/branches">
-                        <RecordAdmin singular="branch" plural="branches" table={BranchTable} form={BranchForm} />
+                        <RecordManager key="branch" singular="branch" plural="branches" table={BranchTable} form={BranchForm} />
                     </Route>
                 </Switch>
             </div>

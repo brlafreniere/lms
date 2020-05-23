@@ -1,7 +1,7 @@
 import React from 'react';
 
 import LoginForm from "./LoginForm";
-import AppContext from '../AppContext';
+import AppContext from '../../AppContext';
 
 class AccountInfo extends React.Component {
     render() {

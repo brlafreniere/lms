@@ -5,7 +5,6 @@ class BranchesController < ApplicationController
     end
 
     def create
-        puts params.inspect
         @branch = Branch.new(branch_params)
         if @branch.save
             render json: @branch.to_json

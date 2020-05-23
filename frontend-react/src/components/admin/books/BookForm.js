@@ -4,7 +4,7 @@ import {
     Redirect
 } from "react-router-dom";
 
-import FormBase from "./FormBase";
+import FormBase from "../FormBase";
 
 export default class BookForm extends FormBase {
     constructor(props) {
@@ -17,10 +17,31 @@ export default class BookForm extends FormBase {
             },
             authors: [],
         };
+        this.title = React.createRef();
+        this.author_id = React.createRef();
+        if (this.props.id) {
+            this.loadBook()
+        }
     }
 
     componentDidMount() {
         this.loadAuthors();
+        if (this.props.id) {
+            this.loadBook()
+        }
+    }
+
+    loadBook = () => {
+        Axios.get(`${process.env.REACT_APP_API_URL}/books/${this.props.id}`).then(response => {
+            this.author_id.current.value = response.data.author_id
+            this.title.current.value = response.data.title
+            this.setState(prevState => {
+                let formFields = Object.assign({}, prevState.formFields)
+                formFields['title'] = response.data['title']
+                formFields['author_id'] = response.data['author_id']
+                return {formFields}
+            })
+        })
     }
 
     loadAuthors = () => {
@@ -30,22 +51,20 @@ export default class BookForm extends FormBase {
     }
 
     render() {
-        if (this.state.redirect) {
-            this.props.refreshBookList();
-        }
+        this.setupRedirect()
         let authors = this.state.authors.map(author => {
             return <option key={author.id} value={author.id}>{author.last_name}, {author.first_name}</option>
         })
         return (
-            <form onSubmit={(e) => {e.preventDefault(); this.props.handleSubmit(e, this.state.formFields, true)}}>
+            <form onSubmit={(e) => {e.preventDefault(); this.handleSubmit(e, this.state.formFields, true)}}>
                 {this.state.redirect ? <Redirect to="/admin/books" /> : null}
                 <div className="form-group">
                     <label htmlFor="title">Title</label>
-                    <input name="title" value={this.state.title} onChange={this.handleFieldChange} type="text" className="form-control" />
+                    <input name="title" ref={this.title} value={this.state.title} onChange={this.handleFieldChange} type="text" className="form-control" />
                 </div>
                 <div className="form-group">
                     <label htmlFor="author">Author</label>
-                    <select name="author_id" onChange={this.handleFieldChange} className="custom-select" size="5">
+                    <select name="author_id" ref={this.author_id} onChange={this.handleFieldChange} className="custom-select" size="5">
                         {authors}
                     </select>
                 </div>
@@ -53,7 +72,7 @@ export default class BookForm extends FormBase {
                     <input name="cover_image" type="file" onChange={this.handleFieldChange} className="custom-file-input" id="customFile" />
                     <label className="custom-file-label" htmlFor="customFile">Cover Image</label>
                 </div>
-                <button style={{marginTop: '1rem'}} type="submit" className="btn btn-primary">Submit</button>
+                <button style={{marginTop: '1rem'}} type="submit" className="btn btn-primary">{this.props.id ? "Update" : "Submit"}</button>
             </form>
         )
     }
