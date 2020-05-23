@@ -7,7 +7,7 @@ import {
     useParams
 } from "react-router-dom";
 
-function WrapFormComponentWithID (props) {
+function FormComponentWithID (props) {
     let {id} = useParams();
     const FormComponent = props.formComponent;
     return (
@@ -58,7 +58,7 @@ export default class RecordManager extends React.Component {
                         <div className="admin-menu">
                             <NavLink className="btn btn-primary" to={`/admin/${this.props.plural}/new`}>New {this.props.singular.charAt(0).toUpperCase() + this.props.singular.slice(1)}</NavLink>
                         </div>
-                        <TableComponent records={this.state.records} deleteRecord={this.deleteRecord} />
+                        <TableComponent plural={this.props.plural} records={this.state.records} deleteRecord={this.deleteRecord} />
                     </Route>
 
                     {/* new record */}
@@ -68,7 +68,7 @@ export default class RecordManager extends React.Component {
 
                     {/* edit record */}
                     <Route exact path={`/admin/${this.props.plural}/:id/edit`}>
-                        <WrapFormComponentWithID formComponent={FormComponent} plural={this.props.plural} redirectCallback={this.loadRecords}/>
+                        <FormComponentWithID formComponent={FormComponent} plural={this.props.plural} redirectCallback={this.loadRecords}/>
                     </Route>
                 </Switch>
             </div>

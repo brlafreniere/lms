@@ -29,24 +29,38 @@ main {
 .book-group {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .book-tile {
-    background-color: #b9e4fa;
-    padding: 1em;
-    margin: 1em;
-    -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.3);
-    -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.3);
-    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.3);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: black;
+    height: 400px;
+    width: 240px;
+    position: relative;
+    margin-bottom: 2em;
 }
 
 .book-tile-title {
-    background-color: white;
+    background-color: black;
+    color: white;
+    opacity: 0.85;
     padding: 1em;
-    border-radius: 1em;
-    margin-top: 1em;
+    position: absolute;
+    bottom: 0;
+    left: 0;
 }
 
-.book-tile img {
-    width: 100px;
+.book-detail {
+    display: flex;
+}
+
+.book-detail-image {
+    background-color: gray;
+    padding: 1em;
+}
+
+.book-detail-title-and-synopsis {
+    padding: 1em;
 }

@@ -2,20 +2,8 @@ import React from "react";
 import Axios from "axios";
 
 import {
-    useParams,
     Redirect
 } from "react-router-dom";
-
-export function RecordFormWrapper(props) {
-}
-
-// can't use useParams in a class component for some reason...
-export function EditRecordForm(props) {
-    let {id} = useParams();
-    return (
-        {/*<RecordForm plural={props.plural} form={props.form} redirectCallback={props.redirectCallback} id={id} />*/}
-    )
-}
 
 export default class FormBase extends React.Component {
     constructor(props) {
@@ -30,15 +18,14 @@ export default class FormBase extends React.Component {
         if (this.state.redirect) {
             this.props.redirectCallback();
         }
-        return (
-            <div>
-                {this.state.redirect ? <Redirect to={`/admin/${this.props.plural}`} /> : null}
-            </div>
-        )
     }
 
     handleSubmit = (event, formFields, multipart = false, id) => {
         event.preventDefault();
+
+        if (id) {
+            formFields['id'] = id
+        }
 
         let formData = null;
         let config = null;
@@ -56,12 +43,23 @@ export default class FormBase extends React.Component {
             formData = formFields;
         }
 
-        Axios.post(`${process.env.REACT_APP_API_URL}/${this.props.plural}`, formData, config)
-        .then(response => {
-            this.setState({redirect: true})
-        }).catch(error => {
-            console.log(error)
-        })
+        if (id) {
+            // put update
+            Axios.put(`${process.env.REACT_APP_API_URL}/${this.props.plural}/${id}`, formData, config)
+            .then(response => {
+                this.setState({redirect: true})
+            }).catch(error => {
+                console.log(error)
+            })
+        } else {
+            // create
+            Axios.post(`${process.env.REACT_APP_API_URL}/${this.props.plural}`, formData, config)
+            .then(response => {
+                this.setState({redirect: true})
+            }).catch(error => {
+                console.log(error)
+            })
+        }
     }
 
     handleFieldChange = (event) => {

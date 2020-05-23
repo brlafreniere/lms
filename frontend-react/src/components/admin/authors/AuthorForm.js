@@ -1,5 +1,7 @@
 import React from "react";
 
+import {Redirect} from "react-router-dom";
+
 import FormBase from "../FormBase";
 
 export default class AuthorForm extends FormBase {
@@ -14,31 +16,22 @@ export default class AuthorForm extends FormBase {
     }
 
     render() {
+        this.setupRedirect();
         return (
-            <div className='tab-body'>
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <th>Last Name</th>
-                            <th>First Name</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.state.authors.map(a =>
-                            <tr key={a.id}>
-                                <td>{a.last_name}</td>
-                                <td>{a.first_name}</td>
-                                <td>
-                                    <nav className="nav">
-                                        <button className="btn btn-primary" onClick={(e) => { this.deleteAuthor(e, a.id) }}>Delete</button>
-                                    </nav>
-                                </td>
-                            </tr>
-                        )}
-                    </tbody>
-                </table>
-            </div>
+            <form onSubmit={(e) => {e.preventDefault(); this.handleSubmit(e, this.state.formFields, false, this.props.id)}}>
+                <div>
+                    {this.state.redirect ? <Redirect to={`/admin/${this.props.plural}`} /> : null}
+                </div>
+                <div className="form-group">
+                    <label htmlFor="first_name">First Name</label>
+                    <input name="first_name" value={this.state.first_name} onChange={this.handleFieldChange} type="text" className="form-control" />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="last_name">Last Name</label>
+                    <input name="last_name" value={this.state.last_name} onChange={this.handleFieldChange} type="text" className="form-control" />
+                </div>
+                <button type="submit" className="btn btn-primary">Submit</button>
+            </form>        
         )
     }
 }

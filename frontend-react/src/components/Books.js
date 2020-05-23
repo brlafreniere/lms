@@ -5,14 +5,13 @@ import { Link } from "react-router-dom";
 
 function Book(props) {
     return (
-        <div className="book-tile">
-            <Link to={`/book/${props.book.id}`}>
-                <div className="book-tile-image">
-                    <img alt={`${props.book.title} book cover`} src={`${process.env.REACT_APP_API_URL}/uploads/${props.book.cover_image_file_name}`} />
+        <Link to={`/book/${props.book.id}`}>
+            <div className="book-tile" style={{'background-image': `url(${process.env.REACT_APP_API_URL}/uploads/${props.book.cover_image_file_name})`}}>
+                <div class='book-tile-title'>
+                    {props.book.title}
                 </div>
-                <div className="book-tile-title">{props.book.title}</div>
-            </Link>
-        </div>
+            </div>
+        </Link>
     )
 }
 
@@ -38,7 +37,7 @@ export default class Books extends React.Component {
         return (
             <div className='book-group'>
                 {this.state.books.map(book => 
-                    <Book book={book} />
+                    <Book key={book.id} book={book} />
                 )}
             </div>
         )
