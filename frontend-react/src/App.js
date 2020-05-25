@@ -4,14 +4,15 @@ import Cookies from 'js-cookie';
 
 import './App.css';
 import Navbar from './components/Navbar';
-import NewBooks from './components/pages/NewBooks';
-import MyAccount from './components/pages/MyAccount';
 import AppContext from './AppContext';
 import AdminPage from './components/admin/AdminPage';
-import BookDetailPage from './components/pages/BookDetail';
-import AboutLMS from './components/pages/AboutLMS';
-import LibraryHome from './components/pages/LibraryHome';
-import CreateAccount from './components/pages/CreateAccount';
+
+import BookDetailPage from './pages/BookDetail';
+import AboutLMS from './pages/AboutLMS';
+import LibraryHome from './pages/LibraryHome';
+import CreateAccount from './pages/CreateAccount';
+import NewBooks from './pages/NewBooks';
+import MyAccount from './pages/MyAccount';
 
 export default class App extends React.Component {
     constructor(props) {
