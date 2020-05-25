@@ -15,11 +15,11 @@ import AuthorTable from "./authors/AuthorTable";
 import AuthorForm from "./authors/AuthorForm";
 
 import {
-    BookDetailAdmin,
     BookTable,
     BookForm,
-    BookInventoryFormWithID,
 } from "../../modules/book";
+import BookDetailAdmin from "./../book/BookDetailAdmin";
+import BookInventoryFormWithID from "./../book/BookInventory";
 
 export default class AdminPage extends React.Component {
     render() {
