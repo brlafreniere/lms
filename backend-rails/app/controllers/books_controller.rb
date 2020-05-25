@@ -8,7 +8,7 @@ class BooksController < ApplicationController
 
     def show
         @book = Book.find(params[:id])
-        render json: @book.to_json(:include => :author)
+        render json: @book.to_json(:include => [:author, :branches])
     end
 
     def create
@@ -32,7 +32,8 @@ class BooksController < ApplicationController
         @book.title = params[:title]
         @book.author_id = params[:author_id]
         @book.synopsis = params[:synopsis]
-        if params[:cover_image] != "null"
+        puts params[:cover_image].inspect
+        if params[:cover_image] != nil
             @book.cover_image_file_name = process_image_upload
         end
 

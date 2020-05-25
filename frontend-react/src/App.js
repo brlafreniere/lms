@@ -11,6 +11,7 @@ import AdminPage from './components/admin/AdminPage';
 import BookDetailPage from './components/pages/BookDetail';
 import AboutLMS from './components/pages/AboutLMS';
 import LibraryHome from './components/pages/LibraryHome';
+import CreateAccount from './components/pages/CreateAccount';
 
 export default class App extends React.Component {
     constructor(props) {
@@ -43,18 +44,27 @@ export default class App extends React.Component {
                         <Route exact path="/">
                             <LibraryHome />
                         </Route>
+
                         <Route exact path="/about">
                             <AboutLMS />
                         </Route>
+
                         <Route exact path="/new-books">
                             <NewBooks />
                         </Route>
+
                         <Route exact path="/book/:id">
                             <BookDetailPage />
                         </Route>
+
                         <Route exact path="/my-account">
                             <MyAccount />
                         </Route>
+
+                        <Route exact path="/create-account">
+                            <CreateAccount />
+                        </Route>
+
                         <Route path="/admin">
                             <AdminPage />
                         </Route>

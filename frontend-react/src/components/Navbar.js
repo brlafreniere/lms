@@ -4,7 +4,7 @@ import AppContext from "../AppContext";
 
 const AdminLink = (
     <li className="nav-item">
-        <Link to="/admin" className="nav-link">
+        <Link to="/admin/books" className="nav-link">
             Admin
         </Link>
     </li>
@@ -33,6 +33,11 @@ const UserMenu = (props) => {
                 <li className="nav-item">
                     <Link to="/my-account" className="nav-link">
                         Log In
+                    </Link>
+                </li>
+                <li className="nav-item">
+                    <Link to="/create-account" className="nav-link">
+                        Create Account
                     </Link>
                 </li>
             </ul>

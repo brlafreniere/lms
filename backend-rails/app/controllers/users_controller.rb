@@ -9,4 +9,13 @@ class UsersController < ApplicationController
       render json: { error: 'Unauthorized' }, status: :unauthorized
     end
   end
+
+  def create
+    @user = User.new(email: params[:email], password: params[:password], password_confirmation: params[:password_confirmation])
+    if @user.save
+        render status: :created
+    else
+        render status: 401
+    end
+  end
 end

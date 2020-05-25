@@ -12,6 +12,7 @@ export default class BranchTable extends React.Component {
                             <th>City</th>
                             <th>State</th>
                             <th>Zip</th>
+                            <th>Options</th>
                         </tr>
                     </thead>
                     <tbody>

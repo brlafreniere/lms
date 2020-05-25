@@ -1,10 +1,6 @@
 import React from "react";
 import Axios from "axios";
 
-import {
-    Redirect
-} from "react-router-dom";
-
 export default class FormBase extends React.Component {
     constructor(props) {
         super(props);

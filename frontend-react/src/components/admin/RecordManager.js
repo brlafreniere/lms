@@ -49,6 +49,8 @@ export default class RecordManager extends React.Component {
         // more on that here: https://medium.com/better-programming/passing-data-to-props-children-in-react-5399baea0356
         const TableComponent = this.props.table
         const FormComponent = this.props.form
+        const DetailComponent = this.props.detail
+        const InventoryForm = this.props.inventory
         return (
             <div className="admin-body">
                 {this.state.errorMessage ? <errorMessage msg={this.state.errorMessage} /> : null}
@@ -58,12 +60,22 @@ export default class RecordManager extends React.Component {
                         <div className="admin-menu">
                             <NavLink className="btn btn-primary" to={`/admin/${this.props.plural}/new`}>New {this.props.singular.charAt(0).toUpperCase() + this.props.singular.slice(1)}</NavLink>
                         </div>
-                        <TableComponent plural={this.props.plural} records={this.state.records} deleteRecord={this.deleteRecord} />
+                        <TableComponent plural={this.props.plural} records={this.state.records} deleteRecord={this.deleteRecord} refreshData={this.loadRecords} />
                     </Route>
 
                     {/* new record */}
                     <Route exact path={`/admin/${this.props.plural}/new`}>
                         <FormComponent plural={this.props.plural} redirectCallback={this.loadRecords} />
+                    </Route>
+
+                    {/* inventory form */}
+                    <Route exact path={`/admin/${this.props.plural}/:id/inventory`}>
+                        <InventoryForm />
+                    </Route>
+
+                    {/* detail */}
+                    <Route exact path={`/admin/${this.props.plural}/:id`}>
+                        <DetailComponent />
                     </Route>
 
                     {/* edit record */}

@@ -14,8 +14,12 @@ import BranchForm from "./branches/BranchForm";
 import AuthorTable from "./authors/AuthorTable";
 import AuthorForm from "./authors/AuthorForm";
 
-import BookTable from "./books/BookTable";
-import BookForm from "./books/BookForm";
+import {
+    BookDetailAdmin,
+    BookTable,
+    BookForm,
+    BookInventoryFormWithID,
+} from "../../modules/book";
 
 export default class AdminPage extends React.Component {
     render() {
@@ -39,7 +43,7 @@ export default class AdminPage extends React.Component {
                 </nav>
                 <Switch>
                     <Route path="/admin/books">
-                        <RecordManager key="book" singular="book" plural="books" table={BookTable} form={BookForm} />
+                        <RecordManager key="book" singular="book" plural="books" table={BookTable} form={BookForm} detail={BookDetailAdmin} inventory={BookInventoryFormWithID} />
                     </Route>
                     <Route path="/admin/authors">
                         <RecordManager key="author" singular="author" plural="authors" table={AuthorTable} form={AuthorForm} />

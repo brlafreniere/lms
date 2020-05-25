@@ -29,13 +29,16 @@ class BookDetail extends React.Component {
 
     render() {
         return (
-            <div class='book-detail'>
-                <div class='book-detail-image'>
+            <div className='book-detail'>
+                <div className='book-detail-image'>
                     <div><img src={`${process.env.REACT_APP_API_URL}/uploads/${this.state.book.cover_image_file_name}`} width="200" alt={this.state.book.title + 'cover image'}/></div>
                 </div>
-                <div class='book-detail-title-and-synopsis'>
+                <div className='book-detail-title-and-synopsis'>
                     <h2>{this.state.book.title}</h2>
                     {this.state.book.synopsis}
+                    <div className='book-detail-options'>
+                        <button type="button" class="btn btn-primary">Check Out</button>
+                    </div>
                 </div>
             </div>
         )
