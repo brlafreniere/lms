@@ -14,10 +14,8 @@ import BranchForm from "./branches/BranchForm";
 import AuthorTable from "./authors/AuthorTable";
 import AuthorForm from "./authors/AuthorForm";
 
-import {
-    BookTable,
-    BookForm,
-} from "../../modules/book";
+import BookTable from "../../components/book/BookTable";
+import BookForm from "../../components/book/BookForm";
 import BookDetailAdmin from "./../book/BookDetailAdmin";
 import BookInventoryFormWithID from "./../book/BookInventory";
 
