@@ -21,4 +21,20 @@ export default class Branch {
             })
         });
     }
+
+    static submitBranch = (branch) => {
+        console.log(branch)
+        return new Promise((resolve, reject) => {
+            if (branch.id) {
+                let path = "/branches/" + branch.id
+                LMS.api_call(path, branch, 'put').then(response => {
+                    resolve(response)
+                })
+            } else {
+                LMS.api_call("/branches/", branch, 'post').then(response => {
+                    resolve(response)
+                })
+            }
+        })
+    }
 }

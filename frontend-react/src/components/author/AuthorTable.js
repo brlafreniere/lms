@@ -10,13 +10,13 @@ export default class AuthorTable extends React.Component {
     render() {
         return (
             <div className='tab-body'>
-                <table className="table table-bordered">
+                <table className="table table-bordered table-hover">
                     <colgroup>
                         <col span="1" />
                         <col span="1" />
                         <col span="1" style={{width: "15%"}} />
                     </colgroup>
-                    <thead>
+                    <thead className="thead-dark">
                         <tr>
                             <th>Last Name</th>
                             <th>First Name</th>

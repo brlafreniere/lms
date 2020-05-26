@@ -10,8 +10,8 @@ export default class BookTable extends React.Component {
     render() {
         return (
             <div className='tab-body'>
-                <table className="table">
-                    <thead>
+                <table className="table table-bordered table-hover">
+                    <thead className="thead-dark">
                         <tr>
                             <th>Title</th>
                             <th>Author</th>

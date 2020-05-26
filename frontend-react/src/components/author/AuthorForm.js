@@ -2,8 +2,8 @@ import React from "react";
 
 import {Redirect} from "react-router-dom";
 
-import LMS from "../../modules/lms";
 import Form from "../../modules/form";
+import Author from "../../modules/author";
 
 export default class AuthorForm extends React.Component {
     constructor(props) {
@@ -18,24 +18,9 @@ export default class AuthorForm extends React.Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-
-        // update if ID is present
-        if (this.state.record.id) {
-            let path = "/authors/" + this.state.record.id
-            LMS.api_call(path, this.state.record, 'put').then(response => {
-                this.setState({redirect: true})
-            })
-        // otherwise create
-        } else {
-            LMS.api_call("/authors/", this.state.record, 'post').then(response => {
-                this.setState({redirect: true})
-            })
-            // Axios.post(LMS.api("/books"), formData, config).then(response => {
-            //     this.setState({redirect: true})
-            // }).catch(error => {
-            //     console.log(error)
-            // })
-        }
+        Author.submitAuthor(this.state.record).then(response => {
+            this.setState({redirect: true})
+        })
     }
 
     render() {

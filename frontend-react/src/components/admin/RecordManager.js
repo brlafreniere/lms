@@ -50,7 +50,7 @@ export default class RecordManager extends React.Component {
         const TableComponent = this.props.table
         const FormComponent = this.props.form
         const DetailComponent = this.props.detail
-        const InventoryForm = this.props.inventory
+        let InventoryForm = this.props.inventory
         return (
             <div className="admin-body">
                 {this.state.errorMessage ? <errorMessage msg={this.state.errorMessage} /> : null}
@@ -68,15 +68,19 @@ export default class RecordManager extends React.Component {
                         <FormComponent plural={this.props.plural} redirectCallback={this.loadRecords} />
                     </Route>
 
-                    {/* inventory form */}
-                    <Route exact path={`/admin/${this.props.plural}/:id/inventory`}>
-                        <InventoryForm />
-                    </Route>
+                    {/* inventory */}
+                    {InventoryForm ?
+                        <Route exact path={`/admin/${this.props.plural}/:id/inventory`}>
+                            <InventoryForm />
+                        </Route>
+                    : null }
 
                     {/* detail */}
-                    <Route exact path={`/admin/${this.props.plural}/:id`}>
-                        <DetailComponent />
-                    </Route>
+                    {DetailComponent ?
+                        <Route exact path={`/admin/${this.props.plural}/:id`}>
+                            <DetailComponent />
+                        </Route>
+                    : null }
 
                     {/* edit record */}
                     <Route exact path={`/admin/${this.props.plural}/:id/edit`}>

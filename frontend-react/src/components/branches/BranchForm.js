@@ -1,37 +1,51 @@
 import React from "react";
+import Branch from "../../modules/branch";
+
+import {Redirect} from "react-router-dom";
+import Form from "../../modules/form";
 
 export default class BranchForm extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            formFields: {
+            record: {
                 name: "",
                 street_address: "",
                 city: "",
                 state: "",
                 zip: ""
-            }
+            },
         }
+    }
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+        Branch.submitBranch(this.state.record).then(response => {
+            this.setState({redirect: true})
+        })
     }
 
     render() {
         return (
-            <form onSubmit={(e) => {e.preventDefault(); this.props.handleSubmit(e, this.state.formFields)}}>
+            <form onSubmit={this.handleSubmit}>
+                <div>
+                    {this.state.redirect ? <Redirect to={`/admin/${this.props.plural}`} /> : null}
+                </div>
                 <div className="form-group">
                     <label htmlFor="name">Name</label>
-                    <input name="name" value={this.state.name} onChange={this.handleFieldChange} type="text" className="form-control" />
+                    <input name="name" value={this.state.record.name} onChange={Form.handleInputChange.bind(this)} type="text" className="form-control" />
                 </div>
                 <div className="form-group">
                     <label htmlFor="street_address">Street Address</label>
-                    <input name="street_address" value={this.state.street_address} onChange={this.handleFieldChange} type="text" className="form-control" />
+                    <input name="street_address" value={this.state.record.street_address} onChange={Form.handleInputChange.bind(this)} type="text" className="form-control" />
                 </div>
                 <div className="form-group">
                     <label htmlFor="city">City</label>
-                    <input name="city" value={this.state.city} onChange={this.handleFieldChange} type="text" className="form-control" />
+                    <input name="city" value={this.state.record.city} onChange={Form.handleInputChange.bind(this)} type="text" className="form-control" />
                 </div>
                 <div className="form-group">
                     <label htmlFor="state">State</label>
-                    <select className="form-control" id="state" name="state">
+                    <select className="form-control" id="state" name="state" value={this.state.record.state} onChange={Form.handleInputChange.bind(this)}>
                         <option value="">N/A</option>
                         <option value="AK">Alaska</option>
                         <option value="AL">Alabama</option>
@@ -89,7 +103,7 @@ export default class BranchForm extends React.Component {
                 </div>
                 <div className="form-group">
                     <label htmlFor="zip">Zip</label>
-                    <input name="zip" value={this.state.zip} onChange={this.handleFieldChange} type="text" className="form-control" />
+                    <input name="zip" value={this.state.record.zip} onChange={Form.handleInputChange.bind(this)} type="text" className="form-control" />
                 </div>
                 <button type="submit" className="btn btn-primary">Submit</button>
             </form>

@@ -1,11 +1,15 @@
 import React from "react"
 
 export default class BranchTable extends React.Component {
+    componentDidMount() {
+        this.props.refreshData();
+    }
+
     render() {
         return (
             <div className='tab-body'>
-                <table className="table">
-                    <thead>
+                <table className="table table-bordered table-hover">
+                    <thead className="thead-dark">
                         <tr>
                             <th>Name</th>
                             <th>Street Address</th>

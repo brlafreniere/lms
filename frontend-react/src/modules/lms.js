@@ -15,7 +15,7 @@ export default class LMS {
                 config = Form.multipartConfig()
             }
 
-            if (method == 'put') {
+            if (method === 'put') {
                 Axios.put(LMS.api(path), formData, config).then(response => {
                     resolve(response)
                 }).catch(error => {
@@ -23,7 +23,7 @@ export default class LMS {
                 })
             }
 
-            if (method == 'post') {
+            if (method === 'post') {
                 Axios.post(LMS.api(path), formData, config).then(response => {
                     resolve(response)
                 }).catch(error => {
