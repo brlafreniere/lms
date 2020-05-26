@@ -8,11 +8,11 @@ import "./AdminPage.css";
 
 import RecordManager from "./RecordManager";
 
-import BranchTable from "./branches/BranchTable";
-import BranchForm from "./branches/BranchForm";
+import BranchTable from "../branches/BranchTable";
+import BranchForm from "../branches/BranchForm";
 
-import AuthorTable from "./authors/AuthorTable";
-import AuthorForm from "./authors/AuthorForm";
+import AuthorTable from "../author/AuthorTable";
+import AuthorForm from "../author/AuthorForm";
 
 import BookTable from "../../components/book/BookTable";
 import BookForm from "../../components/book/BookForm";

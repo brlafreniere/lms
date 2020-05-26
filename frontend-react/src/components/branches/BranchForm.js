@@ -1,8 +1,6 @@
 import React from "react";
 
-import FormBase from "../FormBase";
-
-export default class BranchForm extends FormBase {
+export default class BranchForm extends React.Component {
     constructor(props) {
         super(props)
         this.state = {

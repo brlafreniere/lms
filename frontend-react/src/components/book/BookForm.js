@@ -12,7 +12,7 @@ export default class BookForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            book: {
+            record: {
                 title: '',
                 author_id: 0,
                 synopsis: '',
@@ -34,18 +34,18 @@ export default class BookForm extends React.Component {
 
     loadBook = () => {
         Book.fetch(this.props.id).then(book => {
-            this.setState({book: book})
+            this.setState({record: book})
         })
     }
 
     handleSubmit = (event) => {
         event.preventDefault();
-        let formData = Form.makeFormData(this.state.book)
+        let formData = Form.makeFormData(this.state.record)
         let config = Form.multipartConfig()
 
-        if (this.state.book.id) {
+        if (this.state.record.id) {
             // put update
-            Axios.put(LMS.api("/books/" + this.state.book.id), formData, config).then(response => {
+            Axios.put(LMS.api("/books/" + this.state.record.id), formData, config).then(response => {
                 this.setState({redirect: true})
             }).catch(error => {
                 console.log(error)
@@ -69,19 +69,19 @@ export default class BookForm extends React.Component {
                     </div>
                     <div className="form-group">
                         <label htmlFor="title">Title</label>
-                        <input name="title" value={this.state.book.title} onChange={Form.handleInputChange.bind(this)} type="text" className="form-control" />
+                        <input name="title" value={this.state.record.title} onChange={Form.handleInputChange.bind(this)} type="text" className="form-control" />
                     </div>
                     <div className="form-group">
                         <label htmlFor="author">Author</label>
-                        <AuthorSelectField name="author_id" value={this.state.book.author_id} onChangeCallback={Form.handleInputChange.bind(this)} className="custom-select" size="5" />
+                        <AuthorSelectField name="author_id" value={this.state.record.author_id} onChangeCallback={Form.handleInputChange.bind(this)} className="custom-select" size="5" />
                     </div>
                     <div className="form-group">
                         <label htmlFor="synopsis">Synopsis</label>
-                        <textarea name="synopsis" className="form-control" value={this.state.book.synopsis} onChange={Form.handleInputChange.bind(this)} rows="10">
+                        <textarea name="synopsis" className="form-control" value={this.state.record.synopsis} onChange={Form.handleInputChange.bind(this)} rows="10">
                         </textarea>
                     </div>
-                    {this.state.book.cover_image_file_name ? 
-                        <img className='admin-current-book-cover' src={`${process.env.REACT_APP_API_URL}/uploads/${this.state.book.cover_image_file_name}`} alt={this.state.book.title + " cover image"}/>
+                    {this.state.record.cover_image_file_name ? 
+                        <img className='admin-current-book-cover' src={`${process.env.REACT_APP_API_URL}/uploads/${this.state.record.cover_image_file_name}`} alt={this.state.record.title + " cover image"}/>
                     : null}
                     <div className="custom-file form-group mt-3">
                         <input name="cover_image" type="file" onChange={Form.handleInputChange.bind(this)} className="custom-file-input" id="customFile" />

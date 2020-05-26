@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot test 1`] = `
+<a
+  href="/book/2"
+  onClick={[Function]}
+>
+  <div
+    className="book-tile"
+    style={
+      Object {
+        "backgroundImage": "url(undefined/uploads/foo.jpg)",
+      }
+    }
+  >
+    <div
+      className="book-tile-title"
+    >
+      foo title
+    </div>
+  </div>
+</a>
+`;

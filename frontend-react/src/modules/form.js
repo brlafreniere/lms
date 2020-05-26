@@ -13,7 +13,7 @@ export default class Form {
 
         this.setState(prevState => {
             let newState = Object.assign({}, prevState)
-            newState.book[name] = fieldValue;
+            newState.record[name] = fieldValue;
             return newState;
         })
     }
