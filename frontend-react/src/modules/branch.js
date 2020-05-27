@@ -16,9 +16,7 @@ export default class Branch {
                     return branch;
                 })
                 resolve(branches);
-            }).catch(error => {
-                reject(error)
-            })
+            }).catch(reject)
         });
     }
 
@@ -29,11 +27,11 @@ export default class Branch {
                 let path = "/branches/" + branch.id
                 LMS.api_call(path, branch, 'put').then(response => {
                     resolve(response)
-                })
+                }).catch(console.log)
             } else {
                 LMS.api_call("/branches/", branch, 'post').then(response => {
                     resolve(response)
-                })
+                }).catch(console.log)
             }
         })
     }

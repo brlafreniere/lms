@@ -1,8 +1,8 @@
 import React from "react";
 import Axios from 'axios';
 
-import AppContext from '../AppContext.js';
-import Error from '../components/Error.js';
+import AppContext from '../../AppContext.js';
+import Error from '../Error.js';
 
 export default class LoginForm extends React.Component {
     constructor(props) {

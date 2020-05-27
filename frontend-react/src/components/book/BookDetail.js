@@ -1,15 +1,20 @@
 import React from "react";
 import Axios from "axios";
-import { useParams } from "react-router-dom";
+import {
+    useParams,
+    Link,
+    Switch,
+    Route
+} from "react-router-dom";
 
-export default function BookDetailPage(props) {
+export default function BookDetail(props) {
     let { id } = useParams();
     return (
-        <BookDetail bookId={id} />
+        <BookDetailComponent bookId={id} />
     )
 }
 
-class BookDetail extends React.Component {
+class BookDetailComponent extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -24,7 +29,7 @@ class BookDetail extends React.Component {
     loadBook = () => {
         Axios.get(`${process.env.REACT_APP_API_URL}/books/${this.props.bookId}`).then(response => {
             this.setState({book: response.data})
-        })
+        }).catch(console.log)
     }
 
     render() {
@@ -37,7 +42,7 @@ class BookDetail extends React.Component {
                     <h2>{this.state.book.title}</h2>
                     {this.state.book.synopsis}
                     <div className='book-detail-options'>
-                        <button type="button" class="btn btn-primary">Check Out</button>
+                        <Link to={`/books/${this.state.book.id}/checkout`} className="btn btn-primary">Check Out</Link>
                     </div>
                 </div>
             </div>

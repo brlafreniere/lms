@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<BookDetail /> snapshot test 1`] = `
+<div
+  className="book-detail"
+>
+  <div
+    className="book-detail-image"
+  >
+    <div>
+      <img
+        alt="undefinedcover image"
+        src="undefined/uploads/undefined"
+        width="200"
+      />
+    </div>
+  </div>
+  <div
+    className="book-detail-title-and-synopsis"
+  >
+    <h2 />
+    <div
+      className="book-detail-options"
+    >
+      <a
+        className="btn btn-primary"
+        href="/books/undefined/checkout"
+        onClick={[Function]}
+      >
+        Check Out
+      </a>
+    </div>
+  </div>
+</div>
+`;

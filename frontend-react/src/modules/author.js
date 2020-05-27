@@ -6,14 +6,8 @@ export default class Author {
         return new Promise((resolve, reject) => {
             Axios.get(LMS.api("/authors")).then(response => {
                 resolve(response.data)
-            }).catch(error => {
-                reject(error)
-            })
+            }).catch(reject)
         });
-    }
-
-    static fetch = (id) => {
-
     }
 
     static submitAuthor = (author) => {
@@ -22,11 +16,11 @@ export default class Author {
                 let path = "/authors/" + author.id
                 LMS.api_call(path, author, 'put').then(response => {
                     resolve(response)
-                })
+                }).catch(reject)
             } else {
                 LMS.api_call("/authors/", author, 'post').then(response => {
                     resolve(response)
-                })
+                }).catch(reject)
             }
         })
     }

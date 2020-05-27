@@ -29,19 +29,16 @@ export default class RecordManager extends React.Component {
     }
 
     loadRecords = () => {
-        Axios.get(process.env.REACT_APP_API_URL + '/' + this.props.plural)
-        .then(response => {
+        Axios.get(process.env.REACT_APP_API_URL + '/' + this.props.plural).then(response => {
             this.setState({records: response.data})
-        }).catch(error => {
-            console.log(error)
-        })
+        }).catch(console.log)
     }
 
     deleteRecord = (event, recordId) => {
         event.preventDefault();
         Axios.delete(process.env.REACT_APP_API_URL + '/' + this.props.plural + '/' + recordId).then(response => {
             this.loadRecords();
-        })
+        }).catch(console.log)
     }
 
     render() {

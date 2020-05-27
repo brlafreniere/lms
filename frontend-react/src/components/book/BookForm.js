@@ -35,7 +35,7 @@ export default class BookForm extends React.Component {
     loadBook = () => {
         Book.fetch(this.props.id).then(book => {
             this.setState({record: book})
-        })
+        }).catch(console.log)
     }
 
     handleSubmit = (event) => {
@@ -47,16 +47,12 @@ export default class BookForm extends React.Component {
             // put update
             Axios.put(LMS.api("/books/" + this.state.record.id), formData, config).then(response => {
                 this.setState({redirect: true})
-            }).catch(error => {
-                console.log(error)
-            })
+            }).catch(console.log)
         } else {
             // create
             Axios.post(LMS.api("/books"), formData, config).then(response => {
                 this.setState({redirect: true})
-            }).catch(error => {
-                console.log(error)
-            })
+            }).catch(console.log)
         }
     }
 

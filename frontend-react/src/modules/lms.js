@@ -18,17 +18,13 @@ export default class LMS {
             if (method === 'put') {
                 Axios.put(LMS.api(path), formData, config).then(response => {
                     resolve(response)
-                }).catch(error => {
-                    console.log(error)
-                })
+                }).catch(reject)
             }
 
             if (method === 'post') {
                 Axios.post(LMS.api(path), formData, config).then(response => {
                     resolve(response)
-                }).catch(error => {
-                    console.log(error)
-                })
+                }).catch(reject)
             }
         })
     }

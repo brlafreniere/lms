@@ -8,9 +8,7 @@ export default class Book {
         return new Promise((resolve, reject) => {
             Axios.get(LMS.api("/books/" + id)).then(response => {
                 resolve(response.data);
-            }).catch(error => {
-                reject(error);
-            })
+            }).catch(reject)
         });
     }
 
@@ -18,9 +16,7 @@ export default class Book {
         return new Promise((resolve, reject) => {
             Axios.get(LMS.api("/book_inventories/" + id)).then(response => {
                 resolve(response.data)
-            }).catch(error => {
-                reject(error);
-            })
+            }).catch(reject)
         })
     }
 }

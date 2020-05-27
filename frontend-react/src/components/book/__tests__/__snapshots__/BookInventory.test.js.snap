@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<BookDetail /> snapshot test 1`] = `
+<div>
+  <form
+    onSubmit={[Function]}
+  >
+    <button
+      className="btn btn-primary mb-3"
+    >
+      Add Inventory to Branch
+    </button>
+    <table
+      className="table table-bordered table-hover"
+    >
+      <colgroup>
+        <col
+          span="1"
+          style={
+            Object {
+              "width": "75%",
+            }
+          }
+        />
+        <col
+          span="1"
+          style={
+            Object {
+              "width": "25%",
+            }
+          }
+        />
+      </colgroup>
+      <thead
+        className="thead-dark"
+      >
+        <tr>
+          <th>
+            Branch
+          </th>
+          <th>
+            Copies
+          </th>
+        </tr>
+      </thead>
+      <tbody />
+    </table>
+  </form>
+</div>
+`;

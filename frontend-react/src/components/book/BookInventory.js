@@ -3,14 +3,14 @@ import {useParams} from "react-router-dom";
 
 import Book from "../../modules/book";
 
-export default function BookInventoryFormWithID(props) {
+export default function BookInventoryForm(props) {
     let {id} = useParams();
     return (
-        <BookInventoryForm book_id={id} />
+        <BookInventoryFormComponent book_id={id} />
     )
 }
 
-export class BookInventory extends React.Component {
+export class BookInventoryRecord extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -47,7 +47,7 @@ export class BookInventory extends React.Component {
     }
 }
 
-export class BookInventoryForm extends React.Component {
+export class BookInventoryFormComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -58,7 +58,7 @@ export class BookInventoryForm extends React.Component {
     componentDidMount() {
         Book.fetchInventories(this.props.book_id).then(book_inventories => {
             this.setState({book_inventories: book_inventories})
-        })
+        }).catch(console.log)
     }
 
     handleSubmit = (event) => {
@@ -83,7 +83,7 @@ export class BookInventoryForm extends React.Component {
                         </thead>
                         <tbody>
                             {this.state.book_inventories.map(book_inventory => (
-                                <BookInventory key={book_inventory.id} {...book_inventory} />
+                                <BookInventoryRecord key={book_inventory.id} {...book_inventory} />
                             ))}
                         </tbody>
                     </table>

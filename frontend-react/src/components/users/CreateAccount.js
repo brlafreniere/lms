@@ -36,7 +36,7 @@ export default class CreateAccount extends React.Component {
         event.preventDefault();
         Axios.post(`${process.env.REACT_APP_API_URL}/users`, this.state.formFields).then(response => {
             console.log(response)
-        })
+        }).catch(console.log)
     }
 
     render () {
