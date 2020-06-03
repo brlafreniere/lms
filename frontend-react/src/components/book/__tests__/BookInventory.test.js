@@ -11,7 +11,10 @@ test("<BookDetail /> snapshot test", () => {
         {
             id: 1,
             title: "Foobar",
-            cover_image_file_name: "foo.jpg"
+            cover_image_file_name: "foo.jpg",
+            branch: {
+                name: "Willows Peak"
+            }
         }
     ]
 

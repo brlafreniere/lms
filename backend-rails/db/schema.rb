@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_24_211736) do
+ActiveRecord::Schema.define(version: 2020_06_02_061437) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 2020_05_24_211736) do
     t.integer "copies"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["book_id", "branch_id"], name: "index_book_inventories_on_book_id_and_branch_id", unique: true
     t.index ["book_id"], name: "index_book_inventories_on_book_id"
     t.index ["branch_id"], name: "index_book_inventories_on_branch_id"
   end
