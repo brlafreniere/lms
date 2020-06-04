@@ -29,5 +29,5 @@ production:
   <<: *default
   adapter: postgresql
   database: lms_rails_prod
-  username: lms_rails_prod
-  password: lms_rails_prod
+  username: postgres
+  password: postgres
