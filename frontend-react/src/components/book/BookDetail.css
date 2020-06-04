@@ -1,5 +1,5 @@
-.book-detail {
-    display: flex;
+.book-detail-container {
+
 }
 
 .book-detail-image {
@@ -8,5 +8,5 @@
 }
 
 .book-detail-title-and-synopsis {
-    padding: 1em;
+
 }

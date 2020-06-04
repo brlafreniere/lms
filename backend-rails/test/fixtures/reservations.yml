@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  book: one
+  branch: one
+  user: one
+  ready: false
+  expires: 2020-06-03 00:05:18
+
+two:
+  book: two
+  branch: two
+  user: two
+  ready: false
+  expires: 2020-06-03 00:05:18
