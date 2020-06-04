@@ -4,7 +4,7 @@ import LMS from "./lms"
 export default class Author {
     static all = () => {
         return new Promise((resolve, reject) => {
-            Axios.get(LMS.api("/authors")).then(response => {
+            Axios.get(LMS.api_url("/authors")).then(response => {
                 resolve(response.data)
             }).catch(reject)
         });
@@ -12,16 +12,12 @@ export default class Author {
 
     static submitAuthor = (author) => {
         return new Promise((resolve, reject) => {
-            if (author.id) {
-                let path = "/authors/" + author.id
-                LMS.api_call(path, author, 'put').then(response => {
-                    resolve(response)
-                }).catch(reject)
-            } else {
-                LMS.api_call("/authors/", author, 'post').then(response => {
-                    resolve(response)
-                }).catch(reject)
-            }
+            let path = author.id ? "/authors/" + author.id : "/authors"
+            let func = author.id ? Axios.put : Axios.post
+            let args = {path, payload: author, func}
+            LMS.api_call_v3(args)
+            .then(response => resolve(response))
+            .catch(error => reject(error))
         })
     }
 }

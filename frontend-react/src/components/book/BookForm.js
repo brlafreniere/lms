@@ -40,20 +40,12 @@ export default class BookForm extends React.Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        let formData = Form.makeFormData(this.state.record)
-        let config = Form.multipartConfig()
-
-        if (this.state.record.id) {
-            // put update
-            Axios.put(LMS.api("/books/" + this.state.record.id), formData, config).then(response => {
-                this.setState({redirect: true})
-            }).catch(console.log)
-        } else {
-            // create
-            Axios.post(LMS.api("/books"), formData, config).then(response => {
-                this.setState({redirect: true})
-            }).catch(console.log)
-        }
+        let func = this.state.record.id ? Axios.put : Axios.post
+        let path = this.state.record.id ? "/books/" + this.state.record.id : "/books"
+        let args = {path, payload: this.state.record, func, multipart: true}
+        LMS.api_call_v3(args)
+        .then(response => { this.setState({redirect: true}) })
+        .catch(console.log)
     }
 
     render() {

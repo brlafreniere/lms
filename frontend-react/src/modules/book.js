@@ -6,7 +6,7 @@ import LMS from "./lms";
 export default class Book {
     static fetch = (id) => {
         return new Promise((resolve, reject) => {
-            Axios.get(LMS.api("/books/" + id)).then(response => {
+            Axios.get(LMS.api_url("/books/" + id)).then(response => {
                 resolve(response.data);
             }).catch(reject)
         });
@@ -14,7 +14,7 @@ export default class Book {
 
     static fetchInventories = (id) => {
         return new Promise((resolve, reject) => {
-            Axios.get(LMS.api("/book_inventories/" + id)).then(response => {
+            Axios.get(LMS.api_url("/book_inventories/" + id)).then(response => {
                 resolve(response.data)
             }).catch(reject)
         })
