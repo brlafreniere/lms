@@ -11,13 +11,21 @@ class UsersController < ApplicationController
     end
 
     def show
-        # if params[:id] != Current.user
-        #     # naughty person trying to do naughty things
-        #     render status: :unauthorized
-        # end
-
-        @user = User.find(params[:id])
-        render json: @user.to_json
+        if params[:id].to_i == Current.user.id
+            @user = User.find(params[:id])
+            render json: @user.to_json(
+                :include => {
+                    :checkouts => {
+                        :include => :book
+                    },
+                    :reservations => {
+                        :include => :book
+                    }},
+                except: [:password_digest])
+        else
+            # naughty person trying to do naughty things
+            render status: :unauthorized
+        end
     end
 
     def create
