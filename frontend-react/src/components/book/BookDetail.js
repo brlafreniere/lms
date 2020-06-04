@@ -18,7 +18,7 @@ class ReservationForm extends React.Component {
         }).then(response => {
             console.log(response)
         }).catch(error => {
-            if (error.response.data.book && error.response.data.book[0] == "has already been taken") {
+            if (error.response.data.book && error.response.data.book[0] === "has already been taken") {
                 this.props.reservationFailure("You have already placed a reservation for this book.")
             }
         })
