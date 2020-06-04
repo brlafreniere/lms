@@ -31,3 +31,5 @@
 /config/credentials.yml.enc
 
 public/uploads
+
+lms_rails_test

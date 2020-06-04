@@ -51,16 +51,3 @@ main {
     bottom: 0;
     left: 0;
 }
-
-.book-detail {
-    display: flex;
-}
-
-.book-detail-image {
-    background-color: gray;
-    padding: 1em;
-}
-
-.book-detail-title-and-synopsis {
-    padding: 1em;
-}

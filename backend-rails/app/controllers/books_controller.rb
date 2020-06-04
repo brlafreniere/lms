@@ -1,9 +1,16 @@
 class BooksController < ApplicationController
-    # before_action :authenticate_request
-
     def index
         @books = Book.all.sort_by(&:created_at)
         render json: @books.to_json(:include => :author)
+    end
+
+    def reservation_status
+        @book = Book.find(params[:id])
+        if @book.reservable?
+            render json: {reservable: true}.to_json
+        else
+            render json: {reservable: false}.to_json
+        end
     end
 
     def show

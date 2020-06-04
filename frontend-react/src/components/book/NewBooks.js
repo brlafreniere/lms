@@ -21,11 +21,9 @@ export default class NewBooks extends React.Component {
     }
 
     componentDidMount() {
-        axios.get(`${process.env.REACT_APP_API_URL}/books`)
-            .then(response => {
-                const books = response.data;
-                this.setState({books});
-            });
+        axios.get(`${process.env.REACT_APP_API_URL}/books`).then(response => {
+            this.setState({books: response.data});
+        }).catch(console.log)
     }
 
     render() {

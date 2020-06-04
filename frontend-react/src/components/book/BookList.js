@@ -18,7 +18,7 @@ export default class BookList extends React.Component {
     queryBooks = () => {
         Axios.get(`${process.env.REACT_APP_API_URL}/books`).then(response => {
             this.setState({books: response.data})
-        })
+        }).catch(console.log)
     }
 
     render() {

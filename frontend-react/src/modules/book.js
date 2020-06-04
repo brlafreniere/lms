@@ -8,9 +8,7 @@ export default class Book {
         return new Promise((resolve, reject) => {
             Axios.get(LMS.api("/books/" + id)).then(response => {
                 resolve(response.data);
-            }).catch(error => {
-                reject(error);
-            })
+            }).catch(reject)
         });
     }
 
@@ -18,9 +16,23 @@ export default class Book {
         return new Promise((resolve, reject) => {
             Axios.get(LMS.api("/book_inventories/" + id)).then(response => {
                 resolve(response.data)
-            }).catch(error => {
-                reject(error);
-            })
+            }).catch(reject)
+        })
+    }
+
+    static createReservation(payload) {
+        return new Promise((resolve, reject) => {
+            LMS.api_call_with_auth("/reservations", payload, Axios.post)
+            .then(response => resolve(response))
+            .catch(error => reject(error))
+        })
+    }
+
+    static reservationStatus(payload) {
+        return new Promise((resolve, reject) => {
+            LMS.api_call_with_auth(`/books/${payload.book_id}/reservation-status`, {}, Axios.get)
+            .then(response => resolve(response))
+            .catch(error => reject(error))
         })
     }
 }

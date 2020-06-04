@@ -22,10 +22,10 @@ export class BookDetailAdminComponent extends React.Component {
     componentDidMount() {
         Book.fetch(this.props.id).then(book => {
             this.setState({book: book})
-        });
+        }).catch(console.log);
         Book.fetchInventories(this.props.id).then(book_inventories => {
             this.setState({book_inventories: book_inventories})
-        })
+        }).catch(console.log)
     }
 
     render () {

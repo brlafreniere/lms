@@ -7,12 +7,14 @@ import Navbar from './components/Navbar';
 import AppContext from './AppContext';
 import AdminPage from './components/admin/AdminPage';
 
-import BookDetailPage from './pages/BookDetail';
-import AboutLMS from './pages/AboutLMS';
-import LibraryHome from './pages/LibraryHome';
-import CreateAccount from './pages/CreateAccount';
-import NewBooks from './pages/NewBooks';
-import MyAccount from './pages/MyAccount';
+import BookDetailPage from './components/book/BookDetail';
+import BookCheckout from './components/book/BookCheckout';
+
+import AboutLMS from './components/lms/AboutLMS';
+import LibraryHome from './components/lms/LibraryHome';
+import CreateAccount from './components/users/CreateAccount';
+import NewBooks from './components/book/NewBooks';
+import MyAccount from './components/users/MyAccount';
 
 export default class App extends React.Component {
     constructor(props) {
@@ -54,8 +56,12 @@ export default class App extends React.Component {
                             <NewBooks />
                         </Route>
 
-                        <Route exact path="/book/:id">
+                        <Route exact path="/books/:id">
                             <BookDetailPage />
+                        </Route>
+
+                        <Route path="/books/:id/checkout">
+                            <BookCheckout />
                         </Route>
 
                         <Route exact path="/my-account">
