@@ -6,6 +6,7 @@ import {
 import Book from "../../modules/book";
 import OverlayMenu from "../OverlayMenu"
 import { BranchSelector } from "../branches/Branch";
+import LMS from "../../modules/lms";
 
 import "./BookDetail.css"
 
@@ -16,12 +17,8 @@ class ReservationForm extends React.Component {
             book_id: this.props.book.id,
             branch_id: event.target.branch_id.value
         }).then(response => {
-            console.log(response)
-        }).catch(error => {
-            if (error.response.data.book && error.response.data.book[0] === "has already been taken") {
-                this.props.reservationFailure("You have already placed a reservation for this book.")
-            }
-        })
+            this.props.reservationSuccessful()
+        }).catch(console.log)
         this.props.closeOverlay()
     }
 
@@ -51,20 +48,48 @@ class BookDetailComponent extends React.Component {
         this.state = {
             book: {},
             showReservationMenu: false,
-            reservable: null,
-            reservationFailureMessage: ""
+            reservationSuccessful: false,
         }
     }
 
-    componentDidMount() {
-        this.loadBook();
+    render() {
+        return (
+            <div className='book-detail-container'>
+                <div className='book-detail-status-message'>
+                    <this.StatusMessage />
+                </div>
+                <div className="d-flex">
+                    <this.CoverImage />
+                    <this.TitleAndSynopsis />
+                </div>
+                <this.ReservationMenu />
+            </div>
+        )
     }
 
-    loadBook = () => {
-        Book.fetch(this.props.bookId).then(book => {
-            this.setState({book})
-            this.checkReservationStatus()
-        }).catch(console.log)
+    componentDidMount() {
+        Book.fetch(this.props.bookId)
+            .then(book => {this.setState({book})})
+            .catch(console.log)
+    }
+
+    StatusMessage = () => {
+        let output = null;
+        if (this.state.book["already_checked_out?"]) {
+            output = <div className="alert alert-primary">You currently have this book checked out!</div>
+        }
+        if (this.state.book["already_reserved?"]) {
+            output = <div className="alert alert-primary">You currently have this book reserved!</div>
+        }
+        if (this.state.reservationSuccessful) {
+            output = <div className="alert alert-success">Reservation created!</div>
+        }
+        return output;
+    }
+
+    reservationSuccessful = () => {
+        console.log('here')
+        this.setState({reservationSuccessful: true})
     }
 
     showReservationMenu = () => {
@@ -79,7 +104,11 @@ class BookDetailComponent extends React.Component {
         if (this.state.showReservationMenu) {
             return (
                 <OverlayMenu closeOverlay={this.closeOverlay}>
-                    <ReservationForm book={this.state.book} closeOverlay={this.closeOverlay} reservationFailure={(message) => this.setState({reservable: false, reservationFailureMessage: message})} />
+                    <ReservationForm
+                        book={this.state.book}
+                        closeOverlay={this.closeOverlay}
+                        reservationSuccessful={this.reservationSuccessful}
+                    />
                 </OverlayMenu>
             )
         } else {
@@ -103,46 +132,28 @@ class BookDetailComponent extends React.Component {
         }
     }
 
-    checkReservationStatus = () => {
-        Book.reservationStatus({
-            book_id: this.state.book.id
-        }).then(response => {
-            if (response.data.reservable) {
-                this.setState({reservable: true})
-            } else {
-                this.setState({reservable: false})
-            }
-        }).catch(error => {
-            this.setState({reservable: false})
-        })
+    NumberOfCopiesAvailableForCheckout = () => {
+        return (<div>Copies available: {this.state.book.number_copies_available}</div>)
+    }
+
+    checked_out_or_already_reserved = () => {
+        return (this.state.book['already_reserved?'] || this.state.book['already_checked_out?'])
     }
 
     ReserveButton = () => {
-        const reserveButton = <button className="btn btn-primary mb-3" onClick={this.showReservationMenu}>Reserve</button>
-        const unavailableMessage = <div className="alert alert-danger mb-3">This book is unavailable for reservation. {this.state.reservationFailureMessage}</div>
-        if (this.state.reservable) {
-            return reserveButton;
+        if (!this.checked_out_or_already_reserved() && !this.state.reservationSuccessful) {
+            return (<button className="btn btn-primary mb-3" onClick={this.showReservationMenu}>Reserve</button>)
         } else {
-            return unavailableMessage;
+            return null;
         }
     }
 
     TitleAndSynopsis = () => {
         return (
-            <div className='book-detail-title-and-synopsis p-3'>
+            <div className='book-detail-title-and-synopsis'>
                 <h2>{this.state.book.title}</h2>
+                <div>{LMS.output_html_string(this.state.book.synopsis_formatted)}</div>
                 <this.ReserveButton />
-                <div>{this.state.book.synopsis}</div>
-            </div>
-        )
-    }
-
-    render() {
-        return (
-            <div className='book-detail-container d-flex'>
-                <this.CoverImage />
-                <this.TitleAndSynopsis />
-                <this.ReservationMenu />
             </div>
         )
     }

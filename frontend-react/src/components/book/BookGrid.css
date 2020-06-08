@@ -1,0 +1,10 @@
+.book-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.book-card {
+    width: 250px;
+    height: 500px;
+}

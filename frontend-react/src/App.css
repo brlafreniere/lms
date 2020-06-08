@@ -1,53 +1,27 @@
 .App {
-  text-align: center;
+    text-align: center;
 }
 
 .App-logo {
-  height: 40vmin;
+    height: 40vmin;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
 }
 
 .App-link {
-  color: #09d3ac;
+    color: #09d3ac;
 }
 
 main {
     text-align: left;
     padding-top: 25px;
-}
-
-.book-group {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
-.book-tile {
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-color: black;
-    height: 400px;
-    width: 240px;
-    position: relative;
-    margin-bottom: 2em;
-}
-
-.book-tile-title {
-    background-color: black;
-    color: white;
-    opacity: 0.85;
-    padding: 1em;
-    position: absolute;
-    bottom: 0;
-    left: 0;
 }

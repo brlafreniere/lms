@@ -22,27 +22,30 @@ class AccountInfo extends React.Component {
     render() {
         return (
             <div>
-                <h1 className="text-white bg-info p-3 rounded mt-5">Account for: {this.state.user.email}</h1>
-                <h2 className="mt-5">Checkouts</h2>
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Due</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.state.user.checkouts && this.state.user.checkouts.map(checkout => (
-                            <tr key={checkout.id}>
-                                <td>{checkout.book.title}</td>
-                                <td>{Moment(checkout.book.due_at).format('MMMM Do YYYY')}</td>
+                <h1 className="mt-5">Account Summary</h1>
+                <h3 className="mt-5">Checkouts</h3>
+                {this.state.user.checkouts && this.state.user.checkouts.length > 0 ? 
+                    <table className="table table-bordered">
+                        <thead className="thead-dark">
+                            <tr>
+                                <th>Title</th>
+                                <th>Due</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
-                <h2 className="mt-5">Reservations</h2>
-                <table className="table">
-                    <thead>
+                        </thead>
+                        <tbody>
+                            {this.state.user.checkouts && this.state.user.checkouts.map(checkout => (
+                                <tr key={checkout.id}>
+                                    <td>{checkout.book.title}</td>
+                                    <td>{Moment(checkout.book.due_at).format('MMMM Do YYYY')}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                : "No checkouts" }
+                <h3 className="mt-5">Reservations</h3>
+                {this.state.user.reservations && this.state.user.reservations.length > 0 ? 
+                <table className="table table-bordered">
+                    <thead className="thead-dark">
                         <tr>
                             <th>Title</th>
                             <th>Ready for pick-up</th>
@@ -57,6 +60,7 @@ class AccountInfo extends React.Component {
                         ))}
                     </tbody>
                 </table>
+                : "No reservations" }
             </div>
         );
     }

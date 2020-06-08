@@ -1,5 +1,6 @@
 import Axios from "axios";
 import Cookies from "js-cookie";
+import parse from "html-react-parser";
 
 import Form from "./form";
 
@@ -8,7 +9,29 @@ export default class LMS {
         return `${process.env.REACT_APP_API_URL}${path}`
     }
 
+    static output_html_string(string) {
+        let output = ""
+        if (string) {
+            output = parse(string)
+        }
+        return output;
+    }
+
+    static chunk_array(array, groupSize = 4) {
+        let groups = array.map((item, index) => {
+            return index % groupSize === 0 ? array.slice(index, index + groupSize) : null; 
+        })
+        .filter(item => {return item})
+        return groups
+    }
+
+    // args:
+    // args.path
+    // args.payload
+    // args.func
+    // args.multipart
     static api_call_v3(args) {
+        if (!args.func) args.func = Axios.get
         let config = {
             headers: {
                 "Authorization": Cookies.get('auth-token')

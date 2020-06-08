@@ -1,13 +1,13 @@
 import React from "react";
 
-import BookList from "../book/BookList";
+import BookGrid from "../book/BookGrid";
 
 export default class LibraryHome extends React.Component {
     render () {
         return (
             <div>
                 <h2>Newest Arrivals</h2>
-                <BookList />
+                <BookGrid />
             </div>
         )
     }

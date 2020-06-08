@@ -2,13 +2,13 @@ import React from "react";
 import Axios from "axios";
 import {shallow, mount, render} from "enzyme";
 
-import BookList from "../BookList";
+import BookGrid from "../BookGrid";
 
 import renderer from "react-test-renderer";
 import { MemoryRouter } from "react-router-dom";
 
 
-test("<BookList /> snapshot test", () => {
+test("<BookGrid /> snapshot test", () => {
     const response = {
         data: [
             {
@@ -26,7 +26,7 @@ test("<BookList /> snapshot test", () => {
 
     const component = renderer.create(
         <MemoryRouter>
-            <BookList />
+            <BookGrid />
         </MemoryRouter>
     )
 
@@ -34,8 +34,8 @@ test("<BookList /> snapshot test", () => {
     expect(tree).toMatchSnapshot();
 })
 
-describe('<BookList />', () => {
+describe('<BookGrid />', () => {
     it("queries books on mount", () => {
-        //const wrapper = shallow(<BookList />)
+        //const wrapper = shallow(<BookGrid />)
     })
 })

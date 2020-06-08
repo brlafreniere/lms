@@ -4,18 +4,11 @@ class BooksController < ApplicationController
         render json: @books.to_json(:include => :author)
     end
 
-    def reservation_status
-        @book = Book.find(params[:id])
-        if @book.reservable?
-            render json: {reservable: true}.to_json
-        else
-            render json: {reservable: false}.to_json
-        end
-    end
-
     def show
         @book = Book.find(params[:id])
-        render json: @book.to_json(:include => [:author, :branches])
+        render json: @book.to_json(
+            :include => [:author, :branches],
+            :methods => [:number_copies_available, :already_reserved?, :already_checked_out?])
     end
 
     def create

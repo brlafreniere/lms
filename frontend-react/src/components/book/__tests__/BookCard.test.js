@@ -1,5 +1,5 @@
 import React from "react";
-import BookTile from "../BookTile";
+import BookCard from "../BookCard";
 import { MemoryRouter } from "react-router-dom";
 import renderer from "react-test-renderer";
 
@@ -11,7 +11,7 @@ test("snapshot test", () => {
     };
     const component = renderer.create(
         <MemoryRouter>
-            <BookTile book={book} />
+            <BookCard book={book} />
         </MemoryRouter>
     )
     let tree = component.toJSON();
