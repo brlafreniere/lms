@@ -15,6 +15,7 @@ export default class BookTable extends React.Component {
                         <tr>
                             <th>Title</th>
                             <th>Author</th>
+                            <th>Total Copies</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -23,6 +24,7 @@ export default class BookTable extends React.Component {
                         <tr key={record.id}>
                             <td><Link to={`/admin/books/${record.id}`}>{record.title}</Link></td>
                             <td>{`${record.author.last_name}, ${record.author.first_name}`}</td>
+                            <td>{record.total_inventory}</td>
                             <td>
                                 <nav className="nav">
                                     <Link to={`/admin/books/${record.id}/inventory`} className="btn btn-primary mr-1">Inventory</Link>
