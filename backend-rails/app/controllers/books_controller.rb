@@ -10,7 +10,7 @@ class BooksController < ApplicationController
         @book = Book.find(params[:id])
         render json: @book.to_json(
             :include => [:author, :branches],
-            :methods => [:number_copies_available, :already_reserved?, :already_checked_out?])
+            :methods => [:number_copies_available, :already_reserved?, :already_checked_out?, :total_inventory])
     end
 
     def create

@@ -74,11 +74,15 @@ class BookDetailComponent extends React.Component {
     BookDetailMeta = (props) => {
         return (
             <div className='book-detail-meta'>
-                <table className="table">
+                <table className="table table-bordered table-hover">
                     <tbody>
                         <tr>
                             <td>Options</td>
                             <td><this.ReserveButton /></td>
+                        </tr>
+                        <tr>
+                            <td>Copies in Circulation</td>
+                            <td>{this.state.book.total_inventory}</td>
                         </tr>
                         <tr>
                             <td>Copies Available For Checkout</td>
