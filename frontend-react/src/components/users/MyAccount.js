@@ -4,6 +4,7 @@ import Moment from "moment";
 import LoginForm from "./LoginForm";
 import AppContext from '../../AppContext';
 import User from '../../modules/user';
+import Book from '../../modules/book';
 
 class AccountInfo extends React.Component {
     constructor(props) {
@@ -14,9 +15,18 @@ class AccountInfo extends React.Component {
     }
 
     componentDidMount() {
+        this.refreshMyAccountInfo()
+    }
+
+    refreshMyAccountInfo() {
         User.getMyAccountInfo(this.props.user.id).then(user => {
             this.setState({user})
         })
+    }
+
+    deleteReservation = (book_id) => {
+        Book.deleteReservation(book_id)
+        .then(response => {this.refreshMyAccountInfo()})
     }
 
     render() {
@@ -48,14 +58,18 @@ class AccountInfo extends React.Component {
                     <thead className="thead-dark">
                         <tr>
                             <th>Title</th>
+                            <th>Date Placed</th>
                             <th>Ready for pick-up</th>
+                            <th>Options</th>
                         </tr>
                     </thead>
                     <tbody>
                         {this.state.user.reservations && this.state.user.reservations.map(reservation => (
                             <tr key={reservation.id}>
                                 <td>{reservation.book.title}</td>
+                                <td>{Moment(reservation.created_at).format('MMMM Do YYYY')}</td>
                                 <td>{reservation.ready ? "Yes" : "No"}</td>
+                                <td><button className="btn btn-primary" onClick={(e) => this.deleteReservation(reservation.book.id)}>Cancel</button></td>
                             </tr>
                         ))}
                     </tbody>

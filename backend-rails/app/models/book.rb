@@ -27,11 +27,13 @@ class Book < ApplicationRecord
     end
 
     def number_copies_available
-        (self.total_inventory || 0) - self.total_checked_out - self.total_reserved
+        number = (self.total_inventory || 0) - self.total_checked_out - self.total_reserved
+        return 0 if number < 0
+        return number
     end
 
     def total_inventory
-        self.book_inventories.map{|bi|bi.copies}.reduce(:+)
+        self.book_inventories.map{|bi|bi.copies}.reduce(:+) || 0
     end
 
     def total_reserved

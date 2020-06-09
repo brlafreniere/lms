@@ -30,4 +30,15 @@ export default class Book {
             .catch(error => reject(error))
         })
     }
+
+    static deleteReservation(book_id) {
+        return new Promise((resolve, reject) => {
+            LMS.api_call_v3({
+                path: `/reservations/${book_id}`,
+                func: Axios.delete
+            })
+            .then(response => resolve(response))
+            .catch(error => reject(error))
+        })
+    }
 }

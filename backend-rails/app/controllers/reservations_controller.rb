@@ -13,4 +13,15 @@ class ReservationsController < ApplicationController
             render status: :unprocessable_entity, json: @reservation.errors.to_json
         end
     end
+
+    def destroy
+        book_id = params[:id]
+        @reservation = Reservation.where(book_id: book_id, user: Current.user).first
+        puts @reservation.inspect
+        if @reservation.destroy
+            render status: :ok
+        else
+            render status: :unprocessable_entity
+        end
+    end
 end

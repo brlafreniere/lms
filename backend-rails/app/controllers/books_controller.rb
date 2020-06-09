@@ -1,7 +1,9 @@
 class BooksController < ApplicationController
     def index
         @books = Book.all.sort_by(&:created_at)
-        render json: @books.to_json(:include => :author)
+        render json: @books.to_json(
+            :include => :author,
+            :methods => [:total_inventory])
     end
 
     def show

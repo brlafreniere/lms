@@ -18,7 +18,10 @@ class ReservationForm extends React.Component {
             branch_id: event.target.branch_id.value
         }).then(response => {
             this.props.reservationSuccessful()
-        }).catch(console.log)
+            this.props.refreshBook()
+        }).catch(error => {
+            console.log(error.response)
+        })
         this.props.closeOverlay()
     }
 
@@ -49,6 +52,7 @@ class BookDetailComponent extends React.Component {
             book: {},
             showReservationMenu: false,
             reservationSuccessful: false,
+            cancelReservationSuccessful: false,
         }
     }
 
@@ -67,10 +71,34 @@ class BookDetailComponent extends React.Component {
         )
     }
 
-    componentDidMount() {
+    BookDetailMeta = (props) => {
+        return (
+            <div className='book-detail-meta'>
+                <table className="table">
+                    <tbody>
+                        <tr>
+                            <td>Options</td>
+                            <td><this.ReserveButton /></td>
+                        </tr>
+                        <tr>
+                            <td>Copies Available For Checkout</td>
+                            <td>{this.state.book.number_copies_available}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        )
+    }
+
+    refreshBook = () => {
+        console.log('here')
         Book.fetch(this.props.bookId)
             .then(book => {this.setState({book})})
             .catch(console.log)
+    }
+
+    componentDidMount() {
+        this.refreshBook()
     }
 
     StatusMessage = () => {
@@ -84,12 +112,17 @@ class BookDetailComponent extends React.Component {
         if (this.state.reservationSuccessful) {
             output = <div className="alert alert-success">Reservation created!</div>
         }
+        if (this.state.cancelReservationSuccessful) {
+            output = <div className="alert alert-warning">Reservation cancelled!</div>
+        }
         return output;
     }
 
     reservationSuccessful = () => {
-        console.log('here')
-        this.setState({reservationSuccessful: true})
+        this.setState({
+            reservationSuccessful: true,
+            cancelReservationSuccessful: false
+        })
     }
 
     showReservationMenu = () => {
@@ -108,6 +141,7 @@ class BookDetailComponent extends React.Component {
                         book={this.state.book}
                         closeOverlay={this.closeOverlay}
                         reservationSuccessful={this.reservationSuccessful}
+                        refreshBook={this.refreshBook}
                     />
                 </OverlayMenu>
             )
@@ -132,20 +166,41 @@ class BookDetailComponent extends React.Component {
         }
     }
 
-    NumberOfCopiesAvailableForCheckout = () => {
+    NumberOfCopiesAvailable = () => {
         return (<div>Copies available: {this.state.book.number_copies_available}</div>)
     }
 
-    checked_out_or_already_reserved = () => {
+    checkedOutOrReserved = () => {
         return (this.state.book['already_reserved?'] || this.state.book['already_checked_out?'])
     }
 
     ReserveButton = () => {
-        if (!this.checked_out_or_already_reserved() && !this.state.reservationSuccessful) {
-            return (<button className="btn btn-primary mb-3" onClick={this.showReservationMenu}>Reserve</button>)
+        let button = <button className="btn btn-primary mb-3" onClick={this.showReservationMenu}>Reserve</button>
+        if (!this.checkedOutOrReserved() && !this.state.reservationSuccessful) {
+            return button;
+        } else if (this.state.cancelReservationSuccessful) {
+            return button;
         } else {
-            return null;
+            return (<this.CancelReservationButton />)
         }
+    }
+
+    cancelReservation = () => {
+        Book.deleteReservation(this.state.book.id)
+        .then(response => {
+            this.setState({
+                cancelReservationSuccessful: true,
+                reservationSuccessful: false
+            })
+            this.refreshBook()
+        })
+        .catch(console.log)
+    }
+
+    CancelReservationButton = () => {
+        return (
+            <button className="btn btn-primary" onClick={this.cancelReservation}>Cancel Reservation</button>
+        )
     }
 
     TitleAndSynopsis = () => {
@@ -153,7 +208,7 @@ class BookDetailComponent extends React.Component {
             <div className='book-detail-title-and-synopsis'>
                 <h2>{this.state.book.title}</h2>
                 <div>{LMS.output_html_string(this.state.book.synopsis_formatted)}</div>
-                <this.ReserveButton />
+                <this.BookDetailMeta />
             </div>
         )
     }
