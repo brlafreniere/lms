@@ -5,6 +5,28 @@
 }
 
 .book-card {
-    width: 250px;
-    height: 500px;
+    width: 200px;
+    -webkit-box-shadow: 2px 2px 3px 1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 2px 2px 3px 1px rgba(0,0,0,0.75);
+    box-shadow: 2px 2px 3px 1px rgba(0,0,0,0.75);
+    border: none;
+    border-radius: 0;
+}
+
+.book-card-pad {
+    width: 200px;
+}
+
+.book-card-img {
+    width: 200px;
+}
+
+.book-card-body {
+    padding: 1em;
+}
+
+.book-card-link:link,
+.book-card-link:visited {
+    color: black;
+    text-decoration: none;
 }

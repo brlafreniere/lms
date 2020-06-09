@@ -9,11 +9,11 @@ import "./BookGrid.css"
 
 function BookCard(props) {
     return (
-        <Link className="text-white" to={`/books/${props.book.id}`}>
-            <div className="book-card card bg-dark align-self-stretch">
-                <img className='card-img-top' src={`${process.env.REACT_APP_API_URL}/uploads/${props.book.cover_image_file_name}`} alt={props.book.title + " cover image"} />
-                <div className='card-body'>
-                    <h5 className="card-title">{props.book.title}</h5>
+        <Link className="book-card-link" to={`/books/${props.book.id}`}>
+            <div className="book-card">
+                <img className="book-card-img" src={`${process.env.REACT_APP_API_URL}/uploads/${props.book.cover_image_file_name}`} alt={props.book.title + " cover image"} />
+                <div className="book-card-body">
+                    <h5>{props.book.title}</h5>
                 </div>
             </div>
         </Link>
@@ -44,7 +44,7 @@ export default class BookGrid extends React.Component {
         })
 
         for (let i = props.books.length; i < props.padToSize; i++) {
-            bookCards.push(<div className="book-card" style={{display: "hidden" }}key={i} aria-hidden="true"></div>)
+            bookCards.push(<div className="book-card-pad" style={{display: "hidden" }} key={i} aria-hidden="true"></div>)
         }
 
         return (
@@ -57,7 +57,7 @@ export default class BookGrid extends React.Component {
     BookGridOutput = (props) => {
         let book_chunks = LMS.chunk_array(this.state.books, props.row_size)
         let output = book_chunks.map((chunk, index) => {
-            return (<this.BookRowPadded key={index} books={chunk} padToSize="4" />)
+            return (<this.BookRowPadded key={index} books={chunk} padToSize={props.row_size} />)
         })
         return output;
     }
@@ -65,7 +65,7 @@ export default class BookGrid extends React.Component {
     render() {
         return (
             <div className='book-grid'>
-                <this.BookGridOutput />
+                <this.BookGridOutput row_size={5} />
             </div>
         )
     }
