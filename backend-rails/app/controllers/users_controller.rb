@@ -33,7 +33,7 @@ class UsersController < ApplicationController
         if @user.save
             render status: :created
         else
-            render status: 401
+            render status: :unprocessable_entity, json: @user.errors.to_json
         end
     end
 end
