@@ -4,45 +4,6 @@ import {useParams} from "react-router-dom";
 
 import Book from "../../modules/book";
 
-export class BookInventoryDetail extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            book_inventories: []
-        }
-    }
-
-    componentDidMount() {
-        Book.fetchInventories(this.props.book_id).then(book_inventories => {
-            this.setState({book_inventories})
-        })
-    }
-
-    render() {
-        return (
-            <div>
-                <h4 class="mt-5">Availability</h4>
-                <table class="table mt-4">
-                    <thead>
-                        <tr>
-                            <th>Branch</th>
-                            <th>Copies</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.state.book_inventories && this.state.book_inventories.map(bi => (
-                            <tr key={bi.id}>
-                                <td>{bi.branch.name}</td>
-                                <td>{bi.copies}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
-        )
-    }
-}
-
 /* 
  * Represents a collection of individual book inventory records.
  */
@@ -134,9 +95,13 @@ export class BookInventoryRecord extends React.Component {
         if (this.state.create) {
             let url = `${process.env.REACT_APP_API_URL}/book_inventories`
             Axios.post(url, payload)
+            .then(response => {})
+            .catch(console.log)
         } else {
             let url = `${process.env.REACT_APP_API_URL}/book_inventories/${this.props.id}`
             Axios.put(url, payload)
+            .then(response => {})
+            .catch(console.log)
         }
         this.save_button.current.classList.remove("btn-primary")
         this.save_button.current.classList.add("btn-secondary")
@@ -170,10 +135,14 @@ export class BookInventoryCollectionComponent extends React.Component {
         }
     }
 
-    componentDidMount() {
+    refreshInventories = () => {
         Book.fetchInventories(this.props.book_id).then(book_inventories => {
             this.setState({book_inventories: book_inventories})
         }).catch(console.log)
+    }
+
+    componentDidMount() {
+        this.refreshInventories()
     }
 
     handleSubmit = (event) => {
