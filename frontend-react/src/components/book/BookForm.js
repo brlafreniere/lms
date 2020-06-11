@@ -42,7 +42,7 @@ export default class BookForm extends React.Component {
         event.preventDefault();
         let func = this.state.record.id ? Axios.put : Axios.post
         let path = this.state.record.id ? "/books/" + this.state.record.id : "/books"
-        aet payload = Object.assign(this.state.record, {
+        let payload = Object.assign(this.state.record, {
             author_first_name: event.target.author_first_name.value,
             author_middle_name: event.target.author_middle_name.value,
             author_last_name: event.target.author_last_name.value
