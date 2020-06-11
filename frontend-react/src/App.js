@@ -1,20 +1,9 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
 import './App.css';
-import Navbar from './components/Navbar';
+import SiteMenuAndSwitch from './components/SiteMenuAndSwitch';
 import AppContext from './AppContext';
-import AdminPage from './components/admin/AdminPage';
-
-import BookDetailPage from './components/book/BookDetail';
-import BookCheckout from './components/book/BookCheckout';
-
-import AboutLMS from './components/lms/AboutLMS';
-import LibraryHome from './components/lms/LibraryHome';
-import CreateAccount from './components/users/CreateAccount';
-import NewBooks from './components/book/NewBooks';
-import MyAccount from './components/users/MyAccount';
 
 export default class App extends React.Component {
     constructor(props) {
@@ -43,39 +32,7 @@ export default class App extends React.Component {
         return (
             <div className="App">
                 <AppContext.Provider value={this.state}>
-                    <Navbar>
-                        <Route exact path="/">
-                            <LibraryHome />
-                        </Route>
-
-                        <Route exact path="/about">
-                            <AboutLMS />
-                        </Route>
-
-                        <Route exact path="/new-books">
-                            <NewBooks />
-                        </Route>
-
-                        <Route exact path="/books/:id">
-                            <BookDetailPage />
-                        </Route>
-
-                        <Route path="/books/:id/checkout">
-                            <BookCheckout />
-                        </Route>
-
-                        <Route exact path="/my-account">
-                            <MyAccount />
-                        </Route>
-
-                        <Route exact path="/create-account">
-                            <CreateAccount />
-                        </Route>
-
-                        <Route path="/admin">
-                            <AdminPage />
-                        </Route>
-                    </Navbar>
+                    <SiteMenuAndSwitch />
                 </AppContext.Provider>
             </div>
         );
