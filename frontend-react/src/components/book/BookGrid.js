@@ -44,7 +44,7 @@ export default class BookGrid extends React.Component {
         })
 
         for (let i = props.books.length; i < props.padToSize; i++) {
-            bookCards.push(<div className="book-card-pad" style={{display: "hidden" }} key={i} aria-hidden="true"></div>)
+            bookCards.push(<div className="book-card-pad" style={{display: "hidden" }} key={i + "-pad"} aria-hidden="true"></div>)
         }
 
         return (
