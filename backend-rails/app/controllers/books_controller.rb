@@ -14,7 +14,11 @@ class BooksController < ApplicationController
     end
 
     def create
-        @author = Author.find(params[:author_id])
+        if params[:author_first_name] && params[:author_last_name]
+            @author = Author.new(first_name: params[:author_first_name], last_name: params[:author_last_name], middle_name: params[:author_middle_name])
+        else
+            @author = Author.find(params[:author_id])
+        end
 
         @book = Book.new(title: params[:title], author: @author, synopsis: params[:synopsis])
 

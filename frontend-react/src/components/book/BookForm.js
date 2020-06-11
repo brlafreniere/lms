@@ -33,8 +33,8 @@ export default class BookForm extends React.Component {
     }
 
     loadBook = () => {
-        Book.fetch(this.props.id).then(book => {
-            this.setState({record: book})
+        Book.fetch(this.props.id).then(record => {
+            this.setState({record})
         }).catch(console.log)
     }
 
@@ -42,7 +42,12 @@ export default class BookForm extends React.Component {
         event.preventDefault();
         let func = this.state.record.id ? Axios.put : Axios.post
         let path = this.state.record.id ? "/books/" + this.state.record.id : "/books"
-        let args = {path, payload: this.state.record, func, multipart: true}
+        aet payload = Object.assign(this.state.record, {
+            author_first_name: event.target.author_first_name.value,
+            author_middle_name: event.target.author_middle_name.value,
+            author_last_name: event.target.author_last_name.value
+        })
+        let args = {path, payload: payload, func, multipart: true}
         LMS.api_call_v3(args)
         .then(response => { this.setState({redirect: true}) })
         .catch(console.log)
@@ -61,9 +66,20 @@ export default class BookForm extends React.Component {
                     </div>
                     <div className="form-group">
                         <label htmlFor="author">Author</label>
-                        <AuthorSelectField name="author_id" value={this.state.record.author_id} onChangeCallback={Form.handleInputChange.bind(this)} className="custom-select" size="5" />
+                        <AuthorSelectField name="author_id" value={this.state.record.author_id} className="custom-select" size="5" />
                     </div>
-                    <div className="form-group">
+                    <div>
+                        <label>Create Author</label>
+                    </div>
+                    <div className="input-group">
+                        <div className="input-group-prepend">
+                            <span className="input-group-text">First, Middle, Last</span>
+                        </div>
+                        <input type="text" name="author_first_name" aria-label="First name" className="form-control" />
+                        <input type="text" name="author_middle_name" aria-label="Middle name" className="form-control" />
+                        <input type="text" name="author_last_name" aria-label="Last name" className="form-control" />
+                    </div>
+                    <div className="form-group mt-3">
                         <label htmlFor="synopsis">Synopsis</label>
                         <textarea name="synopsis" className="form-control" value={this.state.record.synopsis} onChange={Form.handleInputChange.bind(this)} rows="10">
                         </textarea>
